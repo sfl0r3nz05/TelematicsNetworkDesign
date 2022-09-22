@@ -31,6 +31,7 @@ To perform the right deployment follow each of the following steps:
 
     - It is recommended accept both options as part of the installation process:
 
+    | Users able to run GNS3| Users able to capture packages |
     |-------------|-----------|
     | ![](img/install-gns3-ubuntu-01.png) | ![](img/install-gns3-ubuntu-02.png) |
 
