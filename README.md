@@ -26,10 +26,17 @@ To perform the right deployment follow each of the following steps:
     ```console
     sudo add-apt-repository ppa:gns3/ppa
     sudo apt update
-    sudo apt install gns3-gui gns3 server
+    sudo apt install gns3-server gns3-gui
     ```
 
-4. Add IOU support::
+    - It is recommended accept both options as part of the installation process:
+
+    | |  |
+    |-------------|-----------|
+    | ![](img/install-gns3-ubuntu-01.png) | ![](img/install-gns3-ubuntu-02.png) |
+
+    
+4. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
 
     ```console
     sudo dpkg –add-architcture i386
