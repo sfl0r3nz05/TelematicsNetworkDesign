@@ -2,7 +2,7 @@
 
 The purpose of this repository is to deploy a GNS3 server on an EC2 instance of AWS. The following figure shows the basic architecture of the deployment to be implemented:
 
-![](img/client-server.png){ width: 200px; }
+<img src="img/client-server.png" alt="drawing" width="200"/>
 
 To perform the right deployment follow each of the following steps:
 
