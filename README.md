@@ -14,6 +14,7 @@ The purpose of this repository is to deploy a GNS3 server on an EC2 instance of 
 To perform the right deployment follow each of the following steps:
 
 1. We assume that we have an EC2 instance deployed with Ubuntu Server 20.04 as OS:
+
     ![](img/ec2.png)
 
 2. The following rules apply for opening incoming connections from:
@@ -25,10 +26,10 @@ To perform the right deployment follow each of the following steps:
     | Custom TCP  | 5000-5030 | Telnet connection for the device management created within GNS3 |
 
     - Example of applied rules
-    
+
     ![](img/ports.png)
 
-3. GNS3 server installation:
+1. GNS3 server installation:
 
     ```console
     sudo apt update
@@ -42,8 +43,8 @@ To perform the right deployment follow each of the following steps:
     |-------------|-----------|
     | ![](img/install-gns3-ubuntu-01.png) | ![](img/install-gns3-ubuntu-02.png) |
 
-    
-4. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
+
+2. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
 
     ```console
     sudo dpkg --add-architecture i386
@@ -51,7 +52,7 @@ To perform the right deployment follow each of the following steps:
     sudo apt install gns3-iou
     ```
 
-5. Install docker on ubuntu:
+3. Install docker on ubuntu:
 
 -  Step 1: Update System
 
