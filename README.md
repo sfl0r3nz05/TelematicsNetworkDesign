@@ -93,6 +93,18 @@ To perform the right deployment follow each of the following steps:
     docker version
     ```
 
+    - After installing Docker and IOU, add your user to the following groups:
+
+    ```console
+    docker version
+    ```
+
+5. Run GNS3 server:
+
+    ```console
+    $ gns3
+    ```
+
 ## To Do
 
 1. Enable secure connection between the client and server via TLS
