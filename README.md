@@ -112,7 +112,7 @@ To perform the right deployment follow each of the following steps:
     http://aws_instance_ip:3080
     ```
 
-<img src="img/front.png" alt="drawing" width="300"/>
+<img src="img/front.png" alt="drawing" width="500"/>
 
 
 ## To Do
