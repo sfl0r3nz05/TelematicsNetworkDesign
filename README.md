@@ -24,8 +24,8 @@ To perform the right deployment follow each of the following steps:
 3. GNS3 server installation:
 
     ```console
-    sudo add-apt-repository ppa:gns3/ppa
     sudo apt update
+    sudo add-apt-repository ppa:gns3/ppa
     sudo apt install gns3-server gns3-gui
     ```
 
