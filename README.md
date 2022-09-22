@@ -9,7 +9,7 @@ To perform the right deployment follow each of the following steps:
 1. We assume that we have an EC2 instance deployed with Ubuntu Server 20.04 as OS:
     ![](img/ec2.png)
 
-2. Se aplican las siguientes reglas para abrir las conexiones entrantes de:
+2. The following rules apply for opening incoming connections from:
 
     | Type        | Port      | Description                                                     |
     |-------------|-----------|-----------------------------------------------------------------|
@@ -21,7 +21,20 @@ To perform the right deployment follow each of the following steps:
     
     ![](img/ports.png)
 
-3. 
+3. GNS3 server installation:
+
+    ```console
+    sudo add-apt-repository ppa:gns3/ppa
+    sudo apt update
+    sudo apt install gns3-gui gns3 server
+    ```
+
+4. Add IOU support::
+
+    ```console
+    sudo dpkg –add-architcture i386
+    sudo apt install gns3-iou
+    ```
 
 ## To Do
 
