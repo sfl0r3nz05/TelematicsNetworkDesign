@@ -39,8 +39,58 @@ To perform the right deployment follow each of the following steps:
 4. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
 
     ```console
-    sudo dpkg –add-architcture i386
+    sudo dpkg --add-architecture i386
+    sudo apt update
     sudo apt install gns3-iou
+    ```
+
+5. Install docker on ubuntu:
+
+-  Step 1: Update System
+
+    ```console
+    sudo apt -y update
+    ```
+- Step 2: Install basic dependencies
+    ```console
+    sudo apt -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    ```
+
+- Step 3: Install Docker CE on Ubuntu 22.04|20.04|18.04
+    - If you have older versions of Docker, remove it and its dependent packages.
+
+    ```console
+    sudo apt remove docker docker-engine docker.io containerd runc
+    ```
+    - Import Docker repository GPG key:
+
+    ```console
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
+    ```
+    - You can then add Docker CE repository to Ubuntu
+
+    ```console
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    ```
+    
+    - Finally install Docker CE on Ubuntu22.04|20.04|18.04:
+
+    ```console
+    sudo apt update
+    sudo apt install docker-ce docker-ce-cli containerd.io
+    ```
+
+    - Add your user account to docker group.
+
+    ```console
+    sudo usermod -aG docker $USER
+    newgrp docker
+    ```
+    
+    - Verify installation by checking Docker version:
+
+    ```console
+    docker version
     ```
 
 ## To Do
