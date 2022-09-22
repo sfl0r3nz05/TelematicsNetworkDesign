@@ -1,8 +1,15 @@
 # GNS3 server configuration on an EC2 instance
 
+- [GNS3 server configuration on an EC2 instance](#gns3-server-configuration-on-an-ec2-instance)
+  - [Deploy GNS3 Server](#deploy-gns3-server)
+  - [Connect to GNS3 Server from GNS3 client](#connect-to-gns3-server-from-gns3-client)
+  - [To Do](#to-do)
+
 The purpose of this repository is to deploy a GNS3 server on an EC2 instance of AWS. The following figure shows the basic architecture of the deployment to be implemented:
 
 <img src="img/client-server.png" alt="drawing" width="300"/>
+
+## Deploy GNS3 Server
 
 To perform the right deployment follow each of the following steps:
 
@@ -115,6 +122,8 @@ To perform the right deployment follow each of the following steps:
 - Verify the service:
 
 <img src="img/front.png" alt="drawing" width="700"/>
+
+## Connect to GNS3 Server from GNS3 client
 
 7. Now, it is time to connect to the server via the GNS3 client and configure the preferences properly.
 
