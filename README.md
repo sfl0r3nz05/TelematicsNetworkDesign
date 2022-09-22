@@ -118,7 +118,7 @@ To perform the right deployment follow each of the following steps:
 
 7. Now, it is time to connect to the server via the GNS3 client and configure the preferences properly.
 
-<img src="img/server_preferences.png" alt="drawing" width="200"/>
+<img src="img/server_preferences.png" alt="drawing" width="700"/>
 
 - Default username/password:
 
@@ -129,7 +129,7 @@ To perform the right deployment follow each of the following steps:
 
 8. Verify that the server has connected properly.
 
-<img src="img/output.png" alt="drawing" width="700"/>
+<img src="img/output.png" alt="drawing" width="300"/>
 
 ## To Do
 
