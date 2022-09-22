@@ -101,11 +101,19 @@ To perform the right deployment follow each of the following steps:
     done
     ```
 
-5. Run GNS3 server:
+6. Run GNS3 server:
 
     ```console
-    $ gns3
+    gns3server
     ```
+- It is now possible to access the GNS3 service:
+
+    ```console
+    http://aws_instance_ip:3080
+    ```
+
+<img src="img/front.png" alt="drawing" width="300"/>
+
 
 ## To Do
 
