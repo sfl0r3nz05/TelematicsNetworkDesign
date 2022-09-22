@@ -11,12 +11,15 @@ To perform the right deployment follow each of the following steps:
 
 2. Se aplican las siguientes reglas para abrir las conexiones entrantes de:
 
-    | Type | Port      | Description                                                         |
-    |------|-----------|---------------------------------------------------------------------|
-    | SSH  | 22        | Instance management                                                 |
-    | TCP  | 3080      | GNS3 client-server connection                                       |
-    | TCP  | 5000-5030 | Telnet connection for the management of devices created within GNS3 |
+    | Type        | Port      | Description                                                     |
+    |-------------|-----------|-----------------------------------------------------------------|
+    | SSH         | 22        | Instance management                                             |
+    | Custom TCP  | 3080      | GNS3 client-server connection                                   |
+    | Custom TCP  | 5000-5030 | Telnet connection for the device management created within GNS3 |
 
+    ![](img/ports.png)
+
+3. 
 
 ## To Do
 
