@@ -6,11 +6,16 @@ The purpose of this repository is to deploy a GNS3 server on an EC2 instance of 
 
 To perform the right deployment follow each of the following steps:
 
-1. We assume that we have an EC2 instance deployed:
+1. We assume that we have an EC2 instance deployed with Ubuntu Server 20.04 as OS:
     ![](img/ec2.png)
 
-2. We assume that we have an EC2 instance deployed:
+2. Se aplican las siguientes reglas para abrir las conexiones entrantes de:
 
+    | Type | Port      | Description                                                         |
+    |------|-----------|---------------------------------------------------------------------|
+    | SSH  | 22        | Instance management                                                 |
+    | TCP  | 3080      | GNS3 client-server connection                                       |
+    | TCP  | 5000-5030 | Telnet connection for the management of devices created within GNS3 |
 
 
 ## To Do
