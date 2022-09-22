@@ -112,8 +112,24 @@ To perform the right deployment follow each of the following steps:
     http://aws_instance_ip:3080
     ```
 
+- Verify the service:
+
 <img src="img/front.png" alt="drawing" width="700"/>
 
+7. Now, it is time to connect to the server via the GNS3 client and configure the preferences properly.
+
+<img src="img/server_preferences.png" alt="drawing" width="700"/>
+
+- Default username/password:
+
+    ```console
+    username: gns3
+    password: gns3
+    ```
+
+8. Verify that the server has connected properly.
+
+<img src="img/output.png" alt="drawing" width="700"/>
 
 ## To Do
 
