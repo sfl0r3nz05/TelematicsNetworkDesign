@@ -96,7 +96,9 @@ To perform the right deployment follow each of the following steps:
     - After installing Docker and IOU, add your user to the following groups:
 
     ```console
-    docker version
+    for i in ubridge libvirt kvm wireshark docker; do
+        sudo usermod -aG $i $USER
+    done
     ```
 
 5. Run GNS3 server:
