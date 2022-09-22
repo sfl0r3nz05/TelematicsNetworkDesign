@@ -17,6 +17,8 @@ To perform the right deployment follow each of the following steps:
     | Custom TCP  | 3080      | GNS3 client-server connection                                   |
     | Custom TCP  | 5000-5030 | Telnet connection for the device management created within GNS3 |
 
+    - Example of applied rules
+    
     ![](img/ports.png)
 
 3. 
