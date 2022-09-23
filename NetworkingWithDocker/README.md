@@ -65,9 +65,9 @@ both networks.
 
 The host mode of networking allows the Docker container to share the same IP address as that of the host and disables the network isolation otherwise provided by network namespaces. The container’s network stack is mapped directly to the host’s network stack. All interfaces and addresses on the host are visible within the container, and all communication possible to or from the host is possible to or from the container.
 
-<img src="img/eth0.png" alt="drawing" width="700"/>
+<img src="img/eth0.png" alt="drawing" width="300"/>
 
-If you run the command *ip addr* on a host (or *ifconfig -a* if your host doesn’t have the ip command available), you will see information about the network interfaces.
+- If you run the command *ip addr* on a host (or *ifconfig -a* if your host doesn’t have the ip command available), you will see information about the network interfaces.
 
     ```console
     ip addr
