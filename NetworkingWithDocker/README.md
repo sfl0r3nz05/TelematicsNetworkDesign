@@ -3,6 +3,7 @@
 - [Networking with Docker](#networking-with-docker)
   - [Docker Networking Types](#docker-networking-types)
     - [Host Networking](#host-networking)
+    - [Bridge Networking](#bridge-networking)
 
 ## Docker Networking Types
 
@@ -57,7 +58,7 @@ Docker offers five network types, each with a different capacity for communicati
 - **Custom bridge network**: This is the same as Bridge Networking but uses a bridge explicitly created for this (and other) containers. An example of how to use this would be a container that runs on an exclusive "database" bridge network. Another container can have an interface on the default bridge and the database bridge, enabling it to communicate with
 both networks.
 
-**Container-defined Networking**: A container can share the address and network configuration of another container. This type enables process isolation between containers, where each container runs one service but where services can still communicate with one another on the localhost address.
+- **Container-defined Networking**: A container can share the address and network configuration of another container. This type enables process isolation between containers, where each container runs one service but where services can still communicate with one another on the localhost address.
 
 **No networking**: This option disables all networking for the container.
 
@@ -98,4 +99,71 @@ The host mode of networking allows the Docker container to share the same IP add
         link/ether 02:42:67:96:74:bc brd ff:ff:ff:ff:ff:ff
         inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
            valid_lft forever preferred_lft forever
+    ```
+
+- If you run the same command from a container using host networking, you will see the same information.
+
+    ```console
+    docker run -it --rm --net=host busybox ip addr
+    ```
+
+- Command output:
+
+    ```console
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+        inet 127.0.0.1/8 scope host lo
+            valid_lft forever preferred_lft forever
+        inet6 ::1/128 scope host 
+            valid_lft forever preferred_lft forever
+    2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq qlen 1000
+        link/ether 0a:c8:28:10:4f:a9 brd ff:ff:ff:ff:ff:ff
+        inet 172.31.28.46/20 brd 172.31.31.255 scope global dynamic eth0
+           valid_lft 2149sec preferred_lft 2149sec
+        inet6 fe80::8c8:28ff:fe10:4fa9/64 scope link 
+            valid_lft forever preferred_lft forever
+    3: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue qlen 1000
+        link/ether 52:54:00:50:2c:a1 brd ff:ff:ff:ff:ff:ff
+        inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+            valid_lft forever preferred_lft forever
+    4: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel master virbr0 qlen 1000
+        link/ether 52:54:00:50:2c:a1 brd ff:ff:ff:ff:ff:ff
+    5: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue 
+        link/ether 02:42:67:96:74:bc brd ff:ff:ff:ff:ff:ff
+        inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+            valid_lft forever preferred_lft forever
+    ```
+
+### Bridge Networking
+
+In a standard Docker installation, the Docker daemon creates a bridge on the host with the name of *docker0*. When a container launches, Docker then creates a virtual ethernet device for it. This device appears within the container as *eth0* and on the host with a name like *vethxxx* where *xxx* is a unique identifier for the interface. The *vethxxx* interface is added to the *docker0* bridge, and this enables communication with other containers on the same host that also use the default bridge.
+
+To demonstrate using the default bridge, run the following command on a host with Docker installed. Since we are not specifying the network - the container will connect to the default bridge when it launches.
+
+<img src="img/net.png" alt="drawing" width="300"/>
+
+- Run the **ip addr** and **ip route** commands inside of the container. You will see the IP address of the container with the *eth0* interface:
+
+    ```console
+    docker run -it --rm busybox /bin/sh
+    ```
+
+- ip addr command output:
+
+    ```console
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+        inet 127.0.0.1/8 scope host lo
+           valid_lft forever preferred_lft forever
+    6: eth0@if7: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue 
+        link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+        inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
+           valid_lft forever preferred_lft forever
+    ```
+
+- ip route command output:
+
+    ```console
+    default via 172.17.0.1 dev eth0 
+    172.17.0.0/16 dev eth0 scope link  src 172.17.0.2
     ```
