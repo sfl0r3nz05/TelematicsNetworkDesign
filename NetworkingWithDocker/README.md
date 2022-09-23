@@ -1,5 +1,9 @@
 # Networking with Docker
 
+- [Networking with Docker](#networking-with-docker)
+  - [Docker Networking Types](#docker-networking-types)
+    - [Host Networking](#host-networking)
+
 ## Docker Networking Types
 
 When a Docker container launches, the Docker engine assigns it a network interface with an IP address, a default gateway, and other components, such as a routing table and DNS services. By default, all addresses come from the same pool, and all containers on the same host can communicate with one another. We can change this by defining the network to which the container should connect, either by creating a custom user-defined network or by using a network provider plugin.
@@ -57,3 +61,41 @@ both networks.
 
 **No networking**: This option disables all networking for the container.
 
+### Host Networking
+
+The host mode of networking allows the Docker container to share the same IP address as that of the host and disables the network isolation otherwise provided by network namespaces. The container’s network stack is mapped directly to the host’s network stack. All interfaces and addresses on the host are visible within the container, and all communication possible to or from the host is possible to or from the container.
+
+<img src="img/eth0.png" alt="drawing" width="700"/>
+
+If you run the command *ip addr* on a host (or *ifconfig -a* if your host doesn’t have the ip command available), you will see information about the network interfaces.
+
+    ```console
+    ip addr
+    ```
+
+- Command output:
+
+    ```console
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+        inet 127.0.0.1/8 scope host lo
+           valid_lft forever preferred_lft forever
+        inet6 ::1/128 scope host
+           valid_lft forever preferred_lft forever
+    2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+        link/ether 0a:c8:28:10:4f:a9 brd ff:ff:ff:ff:ff:ff
+        inet 172.31.28.46/20 brd 172.31.31.255 scope global dynamic eth0
+           valid_lft 3376sec preferred_lft 3376sec
+        inet6 fe80::8c8:28ff:fe10:4fa9/64 scope link 
+           valid_lft forever preferred_lft forever
+    3: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+        link/ether 52:54:00:50:2c:a1 brd ff:ff:ff:ff:ff:ff
+        inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+           valid_lft forever preferred_lft forever
+    4: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel master virbr0 state DOWN group default qlen 1000
+        link/ether 52:54:00:50:2c:a1 brd ff:ff:ff:ff:ff:ff
+    5: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+        link/ether 02:42:67:96:74:bc brd ff:ff:ff:ff:ff:ff
+        inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+           valid_lft forever preferred_lft forever
+    ```
