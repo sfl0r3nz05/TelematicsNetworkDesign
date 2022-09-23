@@ -144,7 +144,7 @@ In a standard Docker installation, the Docker daemon creates a bridge on the hos
 
 To demonstrate using the default bridge, run the following command on a host with Docker installed. Since we are not specifying the network - the container will connect to the default bridge when it launches.
 
-<img src="img/net.png" alt="drawing" width="300"/>
+<img src="img/net.png" alt="drawing" width="500"/>
 
 - Run the **ip addr** and **ip route** commands inside of the container. You will see the IP address of the container with the *eth0* interface:
 
@@ -321,4 +321,4 @@ docker run --net=none --name busybox busybox ip a
 
 How do two containers on the same bridge network talk to one another?
 
-<img src="img/custom.png" alt="drawing" width="700"/>
+<img src="img/custom.png" alt="drawing" width="800"/>
