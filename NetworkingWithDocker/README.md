@@ -322,3 +322,67 @@ docker run --net=none --name busybox busybox ip a
 How do two containers on the same bridge network talk to one another?
 
 <img src="img/custom.png" alt="drawing" width="800"/>
+
+In the above diagram, two containers running on the same host connect via the *docker0* bridge. If *172.17.0.6* (on the left-hand side) wants to send a request to *172.17.0.7* (the one on the right-hand side), the packets move as follows:
+
+1. A packet leaves the container via *eth0* and lands on the corresponding *vethxxx* interface.
+2. The *vethxxx* interface connects to the *vethyyy* interface via the *docker0* bridge.
+3. The *docker0* bridge forwards the packet to the *vethyyy* interface.
+4. The packet moves to the *eth0* interface within the destination container.
+
+We can see this in action by using *ping* and *tcpdump*. Create two containers and inspect their network configuration with *ip addr* and *ip route*. The default route for each container is via the *eth0* interface.
+
+Ping one container from the other, and let the command run so that we can inspect the traffic. Run *tcpdump* on the *docker0* bridge on the host machine. You will see in the output that the traffic moves between the two containers via the *docker0* bridge.
+
+- From inside the container:
+
+    ```console
+    docker run -it --rm --name=container-a busybox /bin/sh
+    ```
+
+- Execute the ping command:
+
+    ```console
+    ping 8.8.8.8
+    ```
+
+    ```console
+    PING 8.8.8.8 (8.8.8.8): 56 data bytes
+    64 bytes from 8.8.8.8: seq=0 ttl=49 time=3.320 ms
+    64 bytes from 8.8.8.8: seq=1 ttl=49 time=0.745 ms
+    64 bytes from 8.8.8.8: seq=2 ttl=49 time=0.751 ms
+    64 bytes from 8.8.8.8: seq=3 ttl=49 time=1.722 ms
+    64 bytes from 8.8.8.8: seq=4 ttl=49 time=1.026 ms
+    64 bytes from 8.8.8.8: seq=5 ttl=49 time=2.127 ms
+    64 bytes from 8.8.8.8: seq=6 ttl=49 time=0.832 ms
+    --- 8.8.8.8 ping statistics ---
+    7 packets transmitted, 7 packets received, 0% packet loss
+    round-trip min/avg/max = 0.745/1.503/3.320 ms
+    ```
+
+- Output of the ping command by tcpdump `sudo tcpdump -i docker0`:
+
+    ```console
+    tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+    listening on docker0, link-type EN10MB (Ethernet), capture size 262144 bytes
+    08:31:46.161909 IP6 ip-172-31-28-46 > ff02::16: HBH ICMP6, multicast listener report v2, 2 group record(s), length 48
+    08:31:46.497936 IP6 ip-172-31-28-46 > ff02::16: HBH ICMP6, multicast listener report v2, 2 group record(s), length 48
+    08:32:58.072563 ARP, Request who-has ip-172-17-0-1.ec2.internal tell ip-172-17-0-2.ec2.internal, length 28
+    08:32:58.072591 ARP, Reply ip-172-17-0-1.ec2.internal is-at 02:42:67:96:74:bc (oui Unknown), length 28
+    08:32:58.072597 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 0, length 64
+    08:32:58.073247 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 0, length 64
+    08:32:59.072750 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 1, length 64
+    08:32:59.073439 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 1, length 64
+    08:33:00.072940 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 2, length 64
+    08:33:00.073642 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 2, length 64
+    08:33:01.073127 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 3, length 64
+    08:33:01.074790 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 3, length 64
+    08:33:02.073324 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 4, length 64
+    08:33:02.074291 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 4, length 64
+    08:33:03.073546 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 5, length 64
+    08:33:03.075614 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 5, length 64
+    08:33:03.105921 ARP, Request who-has ip-172-17-0-2.ec2.internal tell ip-172-17-0-1.ec2.internal, length 28
+    08:33:03.105998 ARP, Reply ip-172-17-0-2.ec2.internal is-at 02:42:ac:11:00:02 (oui Unknown), length 28
+    08:33:04.073746 IP ip-172-17-0-2.ec2.internal > dns.google: ICMP echo request, id 7, seq 6, length 64
+    08:33:04.074520 IP dns.google > ip-172-17-0-2.ec2.internal: ICMP echo reply, id 7, seq 6, length 64
+    ```
