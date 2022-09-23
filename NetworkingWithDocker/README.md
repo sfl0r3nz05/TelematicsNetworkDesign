@@ -185,8 +185,6 @@ docker run --name nginx -p 8080:80 nginx
 
 By default, the Docker container can send traffic to any destination. The Docker daemon creates a rule within Netfilter that modifies outbound packets and changes the source address to be the address of the host itself. The Netfilter configuration allows inbound traffic via the rules that Docker creates when initially publishing the container's ports.
 
-The output included below shows the Netfilter rules created by Docker when it publishes a container’s ports:
-
 - command input `docker run -p 8080:80 --name web -d nginx`:
 
     ```console
@@ -197,4 +195,87 @@ The output included below shows the Netfilter rules created by Docker when it pu
 
     ```console
     "172.17.0.2"
+    ```
+
+The output included below shows the Netfilter rules created by Docker when it publishes a container’s ports:
+
+- Netfilter input command `sudo iptables -L -t nat -v`:
+
+- command output of NAT table within Netfilter:
+
+    ```console
+    Chain PREROUTING (policy ACCEPT 2 packets, 104 bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+        7   336 DOCKER     all  --  any    any     anywhere             anywhere             ADDRTYPE match dst-type LOCAL
+
+    Chain INPUT (policy ACCEPT 2 packets, 104 bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+
+    Chain OUTPUT (policy ACCEPT 20 packets, 1725 bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 DOCKER     all  --  any    any     anywhere            !localhost/8          ADDRTYPE match dst-type LOCAL
+
+    Chain POSTROUTING (policy ACCEPT 20 packets, 1725 bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 MASQUERADE  all  --  any    !docker0  ip-172-17-0-0.ec2.internal/16  anywhere            
+        1    40 RETURN     all  --  any    any     ip-192-168-122-0.ec2.internal/24  base-address.mcast.net/24 
+        0     0 RETURN     all  --  any    any     ip-192-168-122-0.ec2.internal/24  255.255.255.255     
+        0     0 MASQUERADE  tcp  --  any    any     ip-192-168-122-0.ec2.internal/24 !ip-192-168-122-0.ec2.internal/24  masq ports: 1024-65535
+        0     0 MASQUERADE  udp  --  any    any     ip-192-168-122-0.ec2.internal/24 !ip-192-168-122-0.ec2.internal/24  masq ports: 1024-65535
+        0     0 MASQUERADE  all  --  any    any     ip-192-168-122-0.ec2.internal/24 !ip-192-168-122-0.ec2.internal/24 
+        0     0 MASQUERADE  tcp  --  any    any     ip-172-17-0-2.ec2.internal  ip-172-17-0-2.ec2.internal  tcp dpt:http
+
+    Chain DOCKER (2 references)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 RETURN     all  --  docker0 any     anywhere             anywhere            
+        0     0 DNAT       tcp  --  !docker0 any     anywhere             anywhere             tcp dpt:http-alt to:172.17.0.2:80
+    ```
+
+- Netfilter input command `sudo iptables -L -t filter -v`:
+
+- command output FILTER table within Netfilter:
+
+    ```console
+    Chain INPUT (policy ACCEPT 25507 packets, 2332K bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 ACCEPT     udp  --  virbr0 any     anywhere             anywhere             udp dpt:domain
+        0     0 ACCEPT     tcp  --  virbr0 any     anywhere             anywhere             tcp dpt:domain
+        0     0 ACCEPT     udp  --  virbr0 any     anywhere             anywhere             udp dpt:bootps
+        0     0 ACCEPT     tcp  --  virbr0 any     anywhere             anywhere             tcp dpt:bootps
+
+    Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+    pkts bytes target     prot opt in     out     source               destination         
+        0     0 DOCKER-USER  all  --  any    any     anywhere             anywhere            
+        0     0 DOCKER-ISOLATION-STAGE-1  all  --  any    any     anywhere             anywhere            
+        0     0 ACCEPT     all  --  any    docker0  anywhere             anywhere             ctstate RELATED,ESTABLISHED
+        0     0 DOCKER     all  --  any    docker0  anywhere             anywhere            
+        0     0 ACCEPT     all  --  docker0 !docker0  anywhere             anywhere            
+        0     0 ACCEPT     all  --  docker0 docker0  anywhere             anywhere            
+        0     0 ACCEPT     all  --  any    virbr0  anywhere             ip-192-168-122-0.ec2.internal/24  ctstate RELATED,ESTABLISHED
+        0     0 ACCEPT     all  --  virbr0 any     ip-192-168-122-0.ec2.internal/24  anywhere            
+        0     0 ACCEPT     all  --  virbr0 virbr0  anywhere             anywhere            
+        0     0 REJECT     all  --  any    virbr0  anywhere             anywhere             reject-with icmp-port-unreachable
+        0     0 REJECT     all  --  virbr0 any     anywhere             anywhere             reject-with icmp-port-unreachable
+
+    Chain OUTPUT (policy ACCEPT 25123 packets, 2181K bytes)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 ACCEPT     udp  --  any    virbr0  anywhere             anywhere             udp dpt:bootpc
+
+    Chain DOCKER (1 references)
+    pkts bytes target     prot opt in     out     source               destination         
+        0     0 ACCEPT     tcp  --  !docker0 docker0  anywhere             ip-172-17-0-2.ec2.internal  tcp dpt:http
+
+    Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 DOCKER-ISOLATION-STAGE-2  all  --  docker0 !docker0  anywhere             anywhere            
+        0     0 RETURN     all  --  any    any     anywhere             anywhere            
+
+    Chain DOCKER-ISOLATION-STAGE-2 (1 references)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 DROP       all  --  any    docker0  anywhere             anywhere            
+        0     0 RETURN     all  --  any    any     anywhere             anywhere            
+
+    Chain DOCKER-USER (1 references)
+     pkts bytes target     prot opt in     out     source               destination         
+        0     0 RETURN     all  --  any    any     anywhere             anywhere
     ```
