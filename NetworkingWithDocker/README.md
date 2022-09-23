@@ -167,3 +167,34 @@ To demonstrate using the default bridge, run the following command on a host wit
     default via 172.17.0.1 dev eth0 
     172.17.0.0/16 dev eth0 scope link  src 172.17.0.2
     ```
+
+- In another terminal connected to the host, run the *ip addr* command. You will see the corresponding interface created for the container. In the image below it is named *veth65b3e57@if8*.
+
+    ```console
+    9: veth65b3e57@if8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+        link/ether 9e:b7:b7:12:75:89 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+        inet6 fe80::9cb7:b7ff:fe12:7589/64 scope link 
+            valid_lft forever preferred_lft forever
+    ```
+
+Although Docker mapped the container IPs on the bridge, network services running inside of the container are not visible outside of the host. To make them visible, the Docker Engine must be told when launching a container to map ports from that container to ports on the host. This process is called publishing. For example, if you want to map port 80 of a container to port 8080 on the host, then you would have to publish the port as shown in the following command:
+
+```console
+docker run --name nginx -p 8080:80 nginx
+```
+
+By default, the Docker container can send traffic to any destination. The Docker daemon creates a rule within Netfilter that modifies outbound packets and changes the source address to be the address of the host itself. The Netfilter configuration allows inbound traffic via the rules that Docker creates when initially publishing the container's ports.
+
+The output included below shows the Netfilter rules created by Docker when it publishes a container’s ports:
+
+- command input `docker run -p 8080:80 --name web -d nginx`:
+
+    ```console
+    docker inspect web --format='{{json .NetworkSettings.IPAddress}}
+    ```
+
+- command output:
+
+    ```console
+    "172.17.0.2"
+    ```
