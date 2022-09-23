@@ -318,3 +318,7 @@ docker run --net=none --name busybox busybox ip a
 ```
 
 ## Container to container communication
+
+How do two containers on the same bridge network talk to one another?
+
+<img src="img/custom.png" alt="drawing" width="700"/>
