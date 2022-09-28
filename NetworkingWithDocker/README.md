@@ -152,7 +152,7 @@ To demonstrate using the default bridge, run the following command on a host wit
     docker run -it --rm busybox /bin/sh
     ```
 
-- ip addr command output:
+- *ip addr* command output:
 
     ```console
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue qlen 1000
@@ -165,7 +165,7 @@ To demonstrate using the default bridge, run the following command on a host wit
            valid_lft forever preferred_lft forever
     ```
 
-- ip route command output:
+- *ip route* command output:
 
     ```console
     default via 172.17.0.1 dev eth0 
