@@ -106,4 +106,56 @@ CGROUP
 sudo cat /sys/fs/cgroup/memory/foo/memory.usage_in_bytes
 ```
 
-Ahora es posible controlar, o monitorizar el proceso
+## cgroup Example using libcgroup
+
+In the previous example, an object was created on top of an existing *cgroup*. In this example, the *cgroups* are created directly to run directly on applications.
+
+1. Install `cgroup-tools`
+
+```console
+sudo apt-get update 
+sudo apt-get install cgroup-tools
+```
+
+2. Create a *cgroup* in the *cpu* controller
+
+```console
+sudo cgcreate -g cpu:A
+sudo cgcreate -g cpu:B
+```
+
+3. Get the number of cpu shares for cgroup and it comes back as 1024 which is the maximum number of CPU time slots for that particular aplication:
+
+```console
+cgget -r cpu.shares A
+cgget -r cpu.shares B
+```
+
+- *Output* for A:
+
+```console
+A:
+cpu.shares: 1024
+```
+
+- *Output* for B:
+
+```console
+B:
+cpu.shares: 1024
+```
+
+4. Create two processes and assign one to each group:
+
+```console
+sudo cgexec -g cpu:A dd if=/dev/zero of=/dev/null &
+sudo cgexec -g cpu:B dd if=/dev/zero of=/dev/null &
+```
+
+5. To verify the processes the `top` command can be used. They should get an equal CPU time:
+```console
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
+  89641 root      20   0    5520    712    644 R  93.7   0.0   0:35.71 dd                                                                 
+  89508 root      20   0    5520    708    644 R  93.0   0.0   0:41.09 dd   
+```
+
