@@ -165,4 +165,10 @@ sudo cgexec -g cpu:B dd if=/dev/zero of=/dev/null &
 sudo cgset -r cpu.shares=768 A
 sudo cgset -r cpu.shares=256 B
 ```
+7. When the processes are verified using the `top` command. They should get different CPU time:
 
+```console
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
+  89508 root      20   0    5520    708    644 R  97.7   0.0   5:06.05 dd                                                                 
+  89641 root      20   0    5520    712    644 R  93.7   0.0   4:59.44 dd 
+```
