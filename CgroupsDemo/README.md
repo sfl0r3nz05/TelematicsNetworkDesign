@@ -10,7 +10,7 @@ ls -la /sys/fs/cgroup/
 
 Output:
 
-    ```console
+    ```
     total 0
     dr-xr-xr-x 11 root root 0 Oct  1 15:17 .
     drwxr-xr-x  8 root root 0 Oct  1 15:17 ..
