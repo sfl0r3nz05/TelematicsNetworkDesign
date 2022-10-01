@@ -159,3 +159,10 @@ sudo cgexec -g cpu:B dd if=/dev/zero of=/dev/null &
   89508 root      20   0    5520    708    644 R  93.0   0.0   0:41.09 dd   
 ```
 
+6. Next, change the CPU values and check again:
+
+```console
+sudo cgset -r cpu.shares=768 A
+sudo cgset -r cpu.shares=256 B
+```
+
