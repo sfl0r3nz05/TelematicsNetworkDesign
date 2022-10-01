@@ -1,6 +1,6 @@
 # Telematics Network Design
 
-This is a repository dedicated to the Telematics Network Design course of the Master in Telecommunications of the University of Navarra.
+This is a repository dedicated to the Telematics Network Design course Master's degree in Telecommunications of the University of Navarra.
 
 This repository will contain a series of topics of interest for the subject:
 
