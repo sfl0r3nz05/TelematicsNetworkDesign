@@ -1,4 +1,4 @@
-# Cgroups Demo
+# Cgroups Demonstration
 
 **cgroups** (abbreviated from *control groups*) is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes. The *control groups* functionality was merged into the Linux kernel mainline in kernel version *2.6.24*, which was released in January 2008.
 
