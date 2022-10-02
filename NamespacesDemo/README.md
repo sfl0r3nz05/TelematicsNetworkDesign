@@ -156,7 +156,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 
     ![3-terminals-2](./img/3-consoles-2.png)
 
-3. Si es usa el comando `lsns` sobre la **Terminal 1**, se pueden ver los 2 *root namespaces*, donde el *pid namespace* `4026532753` es descendiente del *pid namespace* `4026531836`, por lo que sería posible observarlo dentro *pid namespace* origen.
+3. If you use the `lsns` command on **Terminal 1**, you can see the 2 *root namespaces*, where the *pid namespace* `4026532753` is a descendant of the *pid namespace* `4026531836`, so it would be possible to see it inside *pid namespace* source.
 
     ```console
     # lsns -t pid
@@ -170,7 +170,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
     4026532753 pid       4 80648 root             /bin/bash
     ```
 
-4. Para comprobarlo se usa el comando `ps` sobre la **terminal 1** y de esta manera poder observer los sleep processes lanzados en el pid namespace descendiente.
+4. To check this, use the `ps` command on **terminal 1**  to observe the sleep processes launched in the descending *pid namespace*.
 
     ```console
     # ps -ef
