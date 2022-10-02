@@ -47,7 +47,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 
     There is a column dedicated to identify the process (PID).
 
-2. **Terminal 1**: List all pid namespaces.
+2. **Terminal 1**: List all pid namespaces:
 
     ```console
     # lsns -t pid
@@ -105,7 +105,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
     root           8       1  0 11:01 pts/1    00:00:00 ps -ef
     ```
 
-6. **Terminal 2**: On the created namespace, 3 processes are launched using the command `sleep`
+6. **Terminal 2**: On the created namespace, 3 processes are launched using the command `sleep`:
 
     ```console
     # sleep 2000 &
