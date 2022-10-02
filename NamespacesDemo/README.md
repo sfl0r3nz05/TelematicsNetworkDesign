@@ -31,19 +31,19 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 
 1. **Terminal 1**: See all processes that are running for the system.
 
-```console
-ps -ef
-```
+    ```console
+    ps -ef
+    ```
 
-*Command Output*:
+    *Command Output*:
 
-```console
-UID          PID    PPID  C STIME TTY          TIME CMD
-root           1       0  0 09:44 ?        00:00:07 /sbin/init auto automatic-ubiq
-root           2       0  0 09:44 ?        00:00:00 [kthreadd]
-root           3       2  0 09:44 ?        00:00:00 [rcu_gp]
-```
+    ```console
+    UID          PID    PPID  C STIME TTY          TIME CMD
+    root           1       0  0 09:44 ?        00:00:07 /sbin/init auto automatic-ubiq
+    root           2       0  0 09:44 ?        00:00:00 [kthreadd]
+    root           3       2  0 09:44 ?        00:00:00 [rcu_gp]
+    ```
 
-There is a column dedicated to identify the process (PID).
+    There is a column dedicated to identify the process (PID).
 
-2. 
+2. **Terminal 1**: See all processes that are running for the system.
