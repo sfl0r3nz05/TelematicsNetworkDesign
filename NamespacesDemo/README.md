@@ -105,7 +105,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
     root           8       1  0 11:01 pts/1    00:00:00 ps -ef
     ```
 
-6. **Terminal 2**: Sobre el namespace creado se lanzan 3 procesos usando el comando `sleep`
+6. **Terminal 2**: On the created namespace, 3 processes are launched using the command `sleep`
 
     ```console
     # sleep 2000 &
@@ -154,4 +154,37 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 1. Processes can only see other processes in their own PID namespace, and any descendant namespaces they have
 2. The root PID namespace is the initial PID namespace and all other PID namespaces descend from it. Thus, the root PID namespace can see all processes in all PID namespaces on the system.
 
-![3-terminals-2](./img/3-consoles-2.png)
+    ![3-terminals-2](./img/3-consoles-2.png)
+
+3. Si es usa el comando `lsns` sobre la **Terminal 1**, se pueden ver los 2 *root namespaces*, donde el *pid namespace* `4026532753` es descendiente del *pid namespace* `4026531836`, por lo que sería posible observarlo dentro *pid namespace* origen.
+
+    ```console
+    # lsns -t pid
+    ```
+
+    *Command Output*:
+
+    ```console
+            NS TYPE NPROCS PID USER COMMAND
+    4026531836 pid     249     1 root             /sbin/init auto automatic-ubiquity n
+    4026532753 pid       4 80648 root             /bin/bash
+    ```
+
+4. Para comprobarlo se usa el comando `ps` sobre la **terminal 1** y de esta manera poder observer los sleep processes lanzados en el pid namespace descendiente.
+
+    ```console
+    # ps -ef
+    ```
+
+    *Command Output*:
+
+    ```console
+    UID          PID    PPID  C STIME TTY          TIME CMD
+    ...          ...     ...  .   ...   ...         ... ... 
+    root      126993       2  0 11:49 ?        00:00:00 [kworker/u256:0-events_power_efficient]
+    root      127431       2  0 11:49 ?        00:00:00 [kworker/1:1-events]
+    root      129022   80648  0 11:51 pts/1    00:00:00 sleep 2000
+    root      129109   80648  0 11:51 pts/1    00:00:00 sleep 2100
+    root      129142   80648  0 11:51 pts/1    00:00:00 sleep 2200
+    ...          ...     ...  .   ...   ...         ... ...
+    ```
