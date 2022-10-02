@@ -1,5 +1,9 @@
 # Cgroups Demonstration
 
+- [Cgroups Demonstration](#cgroups-demonstration)
+  - [Example of Manual cgroup use](#example-of-manual-cgroup-use)
+  - [cgroup Example using libcgroup](#cgroup-example-using-libcgroup)
+
 **cgroups** (abbreviated from *control groups*) is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, network, etc.) of a collection of processes. The *control groups* functionality was merged into the Linux kernel mainline in kernel version *2.6.24*, which was released in January 2008.
 
 Groups are materialized in the pseudo-filesystem mounted in `/sys/fs/cgroup` and are created by mkdir in the abovementioned pseudo-filesystem.
