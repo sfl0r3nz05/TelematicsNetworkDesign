@@ -3,6 +3,7 @@
 - [Namespaces Demonstration](#namespaces-demonstration)
   - [Types of Namespaces](#types-of-namespaces)
   - [An Example of PID Namespaces](#an-example-of-pid-namespaces)
+    - [Conclusion of this example](#conclusion-of-this-example)
 
 *Namespaces* are a feature of the Linux kernel that partitions kernel resources such that one set of processes sees one set of resources while another set of processes sees a different set of resources. In other words, the key feature of *namespaces* is that they isolate processes from each other. On a server where you are running many different services, isolating each service and its associated processes from other services means that there is a smaller blast radius for changes, as well as a smaller footprint for security‑related concerns. Mostly though, isolating services meets the architectural style of microservices as described.
 
@@ -32,7 +33,7 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 1. **Terminal 1**: See all processes that are running for the system.
 
     ```console
-    ps -ef
+    # ps -ef
     ```
 
     *Command Output*:
@@ -46,4 +47,111 @@ Before start the demonstration it must be considered that we use 3 terminals nam
 
     There is a column dedicated to identify the process (PID).
 
-2. **Terminal 1**: See all processes that are running for the system.
+2. **Terminal 1**: List all pid namespaces.
+
+    ```console
+    # lsns -t pid
+    ```
+
+    *Command Output*:
+
+    ```console
+            NS TYPE NPROCS   PID USER   COMMAND
+    4026531836 pid      11  4627 ubuntu /lib/systemd/systemd --user
+    ```
+
+    The number `4026531836` is refered as *initial PID namespace* or *root namespace*. By default, all the process that are running on the system will run on this *root namespace*.
+
+3. **Terminal 1**: Confirm that all processes on the system are running on the *root namespace*.
+
+    ```console
+    # ps -e -o pidns,pid,args
+    ```
+
+    *Command Output*:
+
+    ```console
+    PIDNS     PID COMMAND
+    4026531836       1 /sbin/init auto automatic-ubiquity noprompt
+    4026531836       2 [kthreadd]
+    4026531836       3 [rcu_gp]
+    4026531836       4 [rcu_par_gp]
+    4026531836       6 [kworker/0:0H-events_highpri]
+    4026531836       8 [kworker/0:1H-events_highpri]
+    4026531836       9 [mm_percpu_wq]
+    4026531836      10 [ksoftirqd/0]
+    ```
+
+    It can be seen how each process running on the system uses the same *root namespace* `4026531836`.
+
+4. **Terminal 2**: We use the *unshare* command to run programs in new name namespaces. So, the next command allows to create a new namespace with its own user and PID namespaces:
+
+    ```console
+    # unshare --pid --fork --mount-proc /bin/bash
+    ```
+
+5. **Terminal 2**: See all processes that are running for this new names.
+
+    ```console
+    # ps -ef
+    ```
+
+    *Command Output*:
+
+    ```console
+    root@ubuntu:/home/ubuntu# ps -ef
+    UID          PID    PPID  C STIME TTY          TIME CMD
+    root           1       0  0 11:01 pts/1    00:00:00 /bin/bash
+    root           8       1  0 11:01 pts/1    00:00:00 ps -ef
+    ```
+
+6. **Terminal 2**: Sobre el namespace creado se lanzan 3 procesos usando el comando `sleep`
+
+    ```console
+    # sleep 2000 &
+    ```
+
+    ```console
+    # sleep 2100 &
+    ```
+
+    ```console
+    # sleep 2200 &
+    ```
+
+7. **Terminal 2**: See all processes that are running for the system.
+
+    ```console
+    # ps -ef
+    ```
+
+    *Command Output*:
+
+    ```console
+    UID          PID    PPID  C STIME TTY          TIME CMD
+    root           1       0  0 11:01 pts/1    00:00:00 /bin/bash
+    root           9       1  0 11:11 pts/1    00:00:00 sleep 2000
+    root          10       1  0 11:11 pts/1    00:00:00 sleep 2100
+    root          11       1  0 11:11 pts/1    00:00:00 sleep 2200
+    root          12       1  0 11:11 pts/1    00:00:00 ps -ef
+    ```
+
+8. **Terminal 2**: List all pid namespaces in order to see the new namespace.
+
+    ```console
+    # lsns -t pid
+    ```
+
+    *Command Output*:
+
+    ```console
+            NS TYPE NPROCS PID USER COMMAND
+    4026532753 pid       5   1 root /bin/bash
+    ```
+
+### Conclusion of this example
+
+1. Processes can only see other processes in their own PID namespace, and any descendant namespaces they have
+2. The root PID namespace is the initial PID namespace and all other PID namespaces descend from it. Thus, the root PID namespace can see all processes in all PID namespaces on the system.
+
+![3-terminals-2](./img/3-consoles-2.png)

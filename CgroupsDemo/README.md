@@ -53,62 +53,62 @@ drwxr-xr-x  3 root root 0 Oct  1 15:18 user.slice
 
 1. Create a script file *test.sh* with the next code:
 
-```console
-#!/bin/sh
-while [ 1 ]; do
-       echo "hello world"
-       sleep 60
-done
-```
+    ```console
+    #!/bin/sh
+    while [ 1 ]; do
+           echo "hello world"
+           sleep 60
+    done
+    ```
 
 2. Create a new object *foo* manually inside of the *cgroup* hierarchy.
 
-```console
-sudo mkdir /sys/fs/cgroup/memory/foo
-```
+    ```console
+    sudo mkdir /sys/fs/cgroup/memory/foo
+    ```
 
 3. Echo 50 MBytes into the *limit in bytes* option sets the maximum limit of memory for anything that is in the fod group.
 
-```console
-echo 50000000 | sudo tee /sys/fs/cgroup/memory/foo/memory.limit_in_bytes 
-```
+    ```console
+    echo 50000000 | sudo tee /sys/fs/cgroup/memory/foo/memory.limit_in_bytes 
+    ```
 
 4. The exact value that is set can be determined using the *cat* command. It should be noted that it is not exactly *50000000* because the architecture is a multiple of *4096*.
 
-```console
-sudo cat /sys/fs/cgroup/memory/foo/memory.limit_in_bytes 
-```
+    ```console
+    sudo cat /sys/fs/cgroup/memory/foo/memory.limit_in_bytes 
+    ```
 
 5. Recover de Process ID because that is the major mechanism that we use to add things to a *cgroup*
 
-```console
-sh ./test.sh &
-```
+    ```console
+    sh ./test.sh &
+    ```
 
 6. The PID (e.g., `15606`) above is associated with the *foo* object:
 
-```console
-echo 15606 | sudo tee /sys/fs/cgroup/memory/foo/cgroup.procs 
-```
+    ```console
+    echo 15606 | sudo tee /sys/fs/cgroup/memory/foo/cgroup.procs 
+    ```
 
 7. The *ps* command is used to find out the *cgroups* associated with the previous process (e.g., `15606`):
 
-```console
-ps -o cgroup 15606
-```
+    ```console
+    ps -o cgroup 15606
+    ```
 
-*Output*:
+    *Output*:
 
-```console
-CGROUP
-11:blkio:/user.slice,9:pids:/user.slice/user-1000.slice/session-1.scope,8:cpu,cpuacct:/user.slice,7:memory:/foo,5:devices:/use
-```
+    ```console
+    CGROUP
+    11:blkio:/user.slice,9:pids:/user.slice/user-1000.slice/session-1.scope,8:cpu,cpuacct:/user.slice,7:memory:/foo,5:devices:/use
+    ```
 
 8. Process memory consumption can be checked:
 
-```console
-sudo cat /sys/fs/cgroup/memory/foo/memory.usage_in_bytes
-```
+    ```console
+    sudo cat /sys/fs/cgroup/memory/foo/memory.usage_in_bytes
+    ```
 
 ## cgroup Example using libcgroup
 
@@ -116,63 +116,65 @@ In the previous example, an object was created on top of an existing *cgroup*. I
 
 1. Install `cgroup-tools`
 
-```console
-sudo apt-get update 
-sudo apt-get install cgroup-tools
-```
+    ```console
+    sudo apt-get update 
+    sudo apt-get install cgroup-tools
+    ```
 
 2. Create a *cgroup* in the *cpu* controller
 
-```console
-sudo cgcreate -g cpu:A
-sudo cgcreate -g cpu:B
-```
+    ```console
+    sudo cgcreate -g cpu:A
+    sudo cgcreate -g cpu:B
+    ```
 
 3. Get the number of cpu shares for cgroup and it comes back as 1024 which is the maximum number of CPU time slots for that particular aplication:
 
-```console
-cgget -r cpu.shares A
-cgget -r cpu.shares B
-```
+    ```console
+    cgget -r cpu.shares A
+    cgget -r cpu.shares B
+    ```
 
-- *Output* for A:
+    - *Output* for A:
 
-```console
-A:
-cpu.shares: 1024
-```
+    ```console
+    A:
+    cpu.shares: 1024
+    ```
 
-- *Output* for B:
+    - *Output* for B:
 
-```console
-B:
-cpu.shares: 1024
-```
+    ```console
+    B:
+    cpu.shares: 1024
+    ```
 
 4. Create two processes and assign one to each group:
 
-```console
-sudo cgexec -g cpu:A dd if=/dev/zero of=/dev/null &
-sudo cgexec -g cpu:B dd if=/dev/zero of=/dev/null &
-```
+    ```console
+    sudo cgexec -g cpu:A dd if=/dev/zero of=/dev/null &
+    sudo cgexec -g cpu:B dd if=/dev/zero of=/dev/null &
+    ```
 
 5. To verify the processes the `top` command can be used. They should get an equal CPU time:
-```console
-    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
-  89641 root      20   0    5520    712    644 R  93.7   0.0   0:35.71 dd                                                                 
-  89508 root      20   0    5520    708    644 R  93.0   0.0   0:41.09 dd   
-```
+
+    ```console
+        PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
+      89641 root      20   0    5520    712    644 R  93.7   0.0   0:35.71 dd                                                                 
+      89508 root      20   0    5520    708    644 R  93.0   0.0   0:41.09 dd   
+    ```
 
 6. Next, change the CPU values and check again:
 
-```console
-sudo cgset -r cpu.shares=768 A
-sudo cgset -r cpu.shares=256 B
-```
+    ```console
+    sudo cgset -r cpu.shares=768 A
+    sudo cgset -r cpu.shares=256 B
+    ```
+
 7. When the processes are verified using the `top` command. They should get different CPU time:
 
-```console
-    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
-  89508 root      20   0    5520    708    644 R  97.7   0.0   5:06.05 dd                                                                 
-  89641 root      20   0    5520    712    644 R  93.7   0.0   4:59.44 dd 
-```
+    ```console
+        PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                            
+      89508 root      20   0    5520    708    644 R  97.7   0.0   5:06.05 dd                                                                 
+      89641 root      20   0    5520    712    644 R  93.7   0.0   4:59.44 dd 
+    ```
