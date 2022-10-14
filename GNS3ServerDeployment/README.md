@@ -145,7 +145,8 @@ To perform the right deployment follow each of the following steps:
 
 1. Enable secure connection between the client and server via TLS
 2. Document how to apply rules on aws to open port
-3. Documenting how to bypass a network of restrictions by tunneling
+3. Document how to add a new router using binary files
+4. Documenting how to bypass a network of restrictions by tunneling
 
 ```console
  ssh -N -i .\openstack.pem -L 10.62.50.58:3080:172.31.88.200:3080 ubuntu@54.89.220.232
