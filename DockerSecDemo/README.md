@@ -246,7 +246,7 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
      cpuset: '3'
    ```
 
-      **Note:**If you are using AWS (e.g.: t2.medium) instance migrates it to t2.large*.
+      > **Note:** *If you are using AWS (e.g.: t2.medium) instance migrates it to t2.large*.
 
       The above `docker-compose.yml` file will ensure that containers based from it will run on CPU core #3. You will obviously need a Docker Host with at least 4 CPU cores for this to work.
 
