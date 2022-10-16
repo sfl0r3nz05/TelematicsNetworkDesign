@@ -396,6 +396,12 @@ lxc ls --project client2-website
 
 As a final task, lets clean up the containers and projects we created.
 
+List the projects:
+
+```console
+lxc project ls
+```
+
 You cannot remove a project that is in use, so we need to remove the containers and images first.
 
 ```console
