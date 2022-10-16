@@ -83,6 +83,9 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    sudo docker build -t cpu-stress .
+   ```
+   
+   ```console
    Sending build context to Docker daemon 3.072 kB
    Step 1 : FROM ubuntu:latest
    latest: Pulling from library/ubuntu
@@ -100,15 +103,17 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    sudo docker run -d --name stresser cpu-stress
-   stress: info: [5] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
+   ```
 
+   ```console
+   stress: info: [5] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
    ```
 
    Be sure to run the container in the background with the `-d` flag so that you can run the `htop` command in the next step from the same terminal.
 
 7. View the impact of the container using the `htop` command.
 
-  ![img](http://i.imgur.com/LB2yN0t.png)
+   ![img](http://i.imgur.com/LB2yN0t.png)
 
    The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
 
