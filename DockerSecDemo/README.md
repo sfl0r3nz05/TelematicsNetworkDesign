@@ -27,7 +27,7 @@ You will need all of the following to complete this lab:
 The `docker run` command provides many flags that allow you to apply cgroup limitations to new containers. The following flags are of note for this lab:
 
   ```console
-  $ docker run --help
+  docker run --help
   ...
   --cpu-shares                    CPU shares (relative weight)
   ...
@@ -76,7 +76,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
    CMD stress -c 2
    ```
 
-  As you can see, the Dockerfile describes a simple Ubuntu-based container that runs a single command `stress -c 2`. This command spawns two processes - both spinning on `sqrt()`. The effect of this command is to stress two CPU cores.
+   As you can see, the Dockerfile describes a simple Ubuntu-based container that runs a single command `stress -c 2`. This command spawns two processes - both spinning on `sqrt()`. The effect of this command is to stress two CPU cores.
 
 5. Build the image specified in the `Dockerfile`.
 
@@ -109,7 +109,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
   ![img](http://i.imgur.com/LB2yN0t.png)
 
-  The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
+   The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
 
 8. Stop and remove the **stresser** container.
 
@@ -120,12 +120,11 @@ In this step you'll start a new container that will max out two CPU cores. You w
    stresser
    ```
 
-You have seen how it is possible for a single container to max out CPU resources on a Docker Host. You would max out your entire Docker Host if you were to start a **stress** worker processes for each CPU core.
+   You have seen how it is possible for a single container to max out CPU resources on a Docker Host. You would max out your entire Docker Host if you were to start a **stress** worker processes for each CPU core.
 
 ## Set CPU affinity
 
 Docker makes it possible to restrict containers to a particular CPU core, or set of CPU cores. In this step you'll see how to restrict a container to a single CPU core using `docker run` with the `--cpuset-cpus` flag.
-
 
 1. Run a new Docker container called **stresser** and restrict it to running on the first CPU on the system.
 
@@ -135,17 +134,18 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
    0bfbf2d33516065bbcfa56bd8f9df24749312460141bca729f53d66a9b2dba6b
    ```
 
-  The `--cpuset-cpus` flag indexes CPU cores starting at 0. Therefore, CPU 0 is the first CPU on the system. You can specify multiple CPU cores as `0-4`, `0,3` etc.
+   The `--cpuset-cpus` flag indexes CPU cores starting at 0. Therefore, CPU 0 is the first CPU on the system. You can specify multiple CPU cores as `0-4`, `0,3` etc.
 
 2. Run the `htop` command to see the impact the container is having on the Docker Host.
 
-  ![](http://i.imgur.com/IJP31bP.png)
+  ![img](http://i.imgur.com/IJP31bP.png)
 
-  There are a few things worth noting about what you have just done:
-  - The container is based on the same **cpu-stress** image that spawns two stress worker processes.
-  - The two stress worker processes have been restricted to running against a single CPU core by the `--cpuset-cpus` flag.
-  - Each of the two stress processes is consuming ~50% of available time on the single CPU core they are executing on.
-  - `htop` indexes CPU cores starting at 1 whereas `--cpuset-cpus` indexes starting at 0.
+   There are a few things worth noting about what you have just done:
+
+      - The container is based on the same **cpu-stress** image that spawns two stress worker processes.
+      - The two stress worker processes have been restricted to running against a single CPU core by the `--cpuset-cpus` flag.
+      - Each of the two stress processes is consuming ~50% of available time on the single CPU core they are executing on.
+      - `htop` indexes CPU cores starting at 1 whereas `--cpuset-cpus` indexes starting at 0.
 
 You have seen how to lock a container to a executing on a single CPU core on the Docker Host. Feel free to experiment further with the `--cpuset-cpus` flag.
 
