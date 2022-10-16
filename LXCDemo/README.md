@@ -96,7 +96,7 @@ lxc project switch client-website
 Let’s check that we have switched to the new empty project:
 
 ```console
-lxc ls
+lxc project ls
 ```
 
 We would expect to see an empty list at this point.
