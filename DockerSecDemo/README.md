@@ -128,7 +128,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
 7. View the impact of the container using the `htop` command.
 
-   ![img](http://i.imgur.com/LB2yN0t.png)
+   ![img](./img/687474703a2f2f692e696d6775722e636f6d2f4c4232794e30742e706e67.png)
 
    The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
 
@@ -167,7 +167,7 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 
 2. Run the `htop` command to see the impact the container is having on the Docker Host.
 
-   ![img](http://i.imgur.com/IJP31bP.png)
+   ![img](./img/687474703a2f2f692e696d6775722e636f6d2f494a50333162502e706e67.png)
 
    There are a few things worth noting about what you have just done:
 
@@ -222,7 +222,7 @@ In this step you will use the `docker run` command with the `--cpu-shares` flag 
 
 4. View the output of `htop`.
 
-  ![img](http://i.imgur.com/zRqkQHt.png)
+  ![img](./img/687474703a2f2f692e696d6775722e636f6d2f7a52716b5148742e706e67.png)
 
   Notice two things about the `htop` output. First, only a single CPU is being maxed out. Second, there are four `stress` processes running. The first two in the list equate to ~75% of CPU time, and the second two equate to ~25% of CPU time.
 
@@ -264,7 +264,7 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
 
 3. Run `htop` to see the effect of the `cpuset` parameter.
 
-  ![img](http://i.imgur.com/DsCOSSB.png)
+  ![img](./img/687474703a2f2f692e696d6775722e636f6d2f4473434f5353422e706e67.png)
 
   The `htop` output above shows the container and it's two `stress` processes locked to CPU core 4 (`cpuset` in Docker Compose indexes CPU cores starting at 0 whereas `htop` indexes CPU cores starting at 1).
 
