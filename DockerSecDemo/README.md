@@ -69,10 +69,11 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    cat Dockerfile
+   ```
+
+   ```console  
    FROM ubuntu:latest
-
    RUN apt-get update && apt-get install -y stress
-
    CMD stress -c 2
    ```
 
