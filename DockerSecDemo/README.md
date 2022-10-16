@@ -4,14 +4,17 @@ Control Groups (cgroups) are a feature of the Linux kernel that allow you to lim
 
 In this lab you will use cgroups to limit the resources available to Docker containers. You will see how to pin a container to specific CPU cores, limit the number of CPU shares a container has, as well as how to prevent a fork bomb from taking down a Docker Host.
 
-Prerequisites
+# Prerequisites
+
 You will need all of the following to complete this lab:
 
-A Linux-based Docker Host with at least two CPU cores
+- A Linux-based Docker Host with at least two CPU cores
 Docker 1.11 or higher
 The htop tool installed on your Docker Host (apt-get install htop on Ubuntu hosts)
 Root access on the Docker Host
-Step 1: cgroups and the Docker CLI
+
+## cgroups and the Docker CLI
+
 The docker run command provides many flags that allow you to apply cgroup limitations to new containers. The following flags are of note for this lab:
 
    $ docker run --help
@@ -23,7 +26,8 @@ The docker run command provides many flags that allow you to apply cgroup limita
   --pids-limit                    Tune container pids limit (set -1 for unlimited)
 For more information on cgroup related flags available to the docker run command, see the docker run reference guide.
 
-Step 2: Max-out two CPUs
+## Max-out two CPUs
+
 In this step you’ll start a new container that will max out two CPU cores. You will need htop installed on your Docker Host, and you will need to be running a Docker Host that has two or more CPU cores. This step will still work if your Docker Host only has a single core. However, some of the htop outputs will be slightly different.
 
 If you haven’t already done so, install htop on your Docker Host.
@@ -95,7 +99,8 @@ stresser
 stresser
 You have seen how it is possible for a single container to max out CPU resources on a Docker Host. You would max out your entire Docker Host if you were to start a stress worker processes for each CPU core.
 
-Step 3: Set CPU affinity
+## Set CPU affinity
+
 Docker makes it possible to restrict containers to a particular CPU core, or set of CPU cores. In this step you’ll see how to restrict a container to a single CPU core using docker run with the --cpuset-cpus flag.
 
 Run a new Docker container called stresser and restrict it to running on the first CPU on the system.
@@ -116,7 +121,7 @@ Each of the two stress processes is consuming ~50% of available time on the sing
 htop indexes CPU cores starting at 1 whereas --cpuset-cpus indexes starting at 0.
 You have seen how to lock a container to a executing on a single CPU core on the Docker Host. Feel free to experiment further with the --cpuset-cpus flag.
 
-Step 4: Set CPU share constraints
+## Set CPU share constraints
 By default, all containers get an equal share of time executing on the Docker Host’s CPUs. This allocation of time can be modified by changing the container’s CPU share weighting relative to the weighting of all other running containers.
 
 The --cpu-shares flag takes a value from 0-1024. The default value is 1024, and a value of 0 will also default to 1024. If three containers are running and one has 1024 shares, while the other two have 512, the first container will get 50% of processor time while the other two will each get 25%. However, these shares are only enforced when CPU intensive tasks are running. When a container is not busy, other containers can use the free CPU time.
@@ -148,7 +153,7 @@ In this step you’ve seen how to use the --cpu-shares flag to influence the amo
 
 Feel free to experiment further by running more containers with different relative weights.
 
-Step 5: Docker Compose and cgroups
+## Docker Compose and cgroups
 In this step you’ll see how to set CPU affinities via Docker Compose files.
 
 See this section of the Docker Compose documentation for more information on leveraging other cgroup capabilities using Docker Compose.
@@ -176,7 +181,7 @@ The htop output above shows the container and it’s two stress processes locked
 
 In this step you’ve seen how Docker Compose can set container CPU affinities. Remember that Docker Compose can also set CPU quotas and shares. See the documentation for more detail.
 
-Step 6: Preventing a fork bomb
+## Preventing a fork bomb
 A fork bomb is a form of denial of service (DoS) attack where a process continually replicates itself with the goal of depleting system resources to the point where a system can no longer function.
 
 In this step you will use the --pids-limit flag to limit the number of processes a container can fork at runtime. This will prevent a fork bomb from consuming the Docker Host’s entire process table.
