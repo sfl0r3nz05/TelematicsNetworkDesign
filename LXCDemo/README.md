@@ -238,6 +238,26 @@ This is equivalent to running just:
 lxc project create client2-website
 ```
 
+If the projects are listed:
+
+```console
+lxc project ls
+```
+
+We now are able to see 3 projects:
+
+```console
++-------------------+--------+----------+-----------------+----------+---------------------+---------+
+|       NAME        | IMAGES | PROFILES | STORAGE VOLUMES | NETWORKS |     DESCRIPTION     | USED BY |
++-------------------+--------+----------+-----------------+----------+---------------------+---------+
+| client2-website   | YES    | YES      | YES             | NO       |                     | 1       |
++-------------------+--------+----------+-----------------+----------+---------------------+---------+
+| client-website    | NO     | NO       | YES             | NO       |                     | 2       |
++-------------------+--------+----------+-----------------+----------+---------------------+---------+
+| default (current) | YES    | YES      | YES             | YES      | Default LXD project | 4       |
++-------------------+--------+----------+-----------------+----------+---------------------+---------+
+```
+
 Now lets create a container in the new project:
 
 ```console
