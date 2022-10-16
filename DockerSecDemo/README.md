@@ -246,6 +246,8 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
      cpuset: '3'
    ```
 
+      ***Note:****If you are using AWS (e.g.: t2.medium) instance migrates it to t2.large*.
+
       The above `docker-compose.yml` file will ensure that containers based from it will run on CPU core #3. You will obviously need a Docker Host with at least 4 CPU cores for this to work.
 
 2. Bring the application up in the background.
@@ -265,8 +267,6 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
   ![img](http://i.imgur.com/DsCOSSB.png)
 
   The `htop` output above shows the container and it's two `stress` processes locked to CPU core 4 (`cpuset` in Docker Compose indexes CPU cores starting at 0 whereas `htop` indexes CPU cores starting at 1).
-
-In this step you've seen how Docker Compose can set container CPU affinities. Remember that Docker Compose can also set CPU quotas and shares. See the [documentation](https://docs.docker.com/compose/compose-file/#cpu-shares-cpu-quota-cpuset-domainname-hostname-ipc-mac-address-mem-limit-memswap-limit-privileged-read-only-restart-shm-size-stdin-open-tty-user-working-dir) for more detail.
 
 ## Preventing a fork bomb
 

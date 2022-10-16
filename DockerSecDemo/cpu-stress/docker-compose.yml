@@ -1,2 +1,6 @@
-cpu-stress:
-  build: .
+version: "3.9"
+
+services:
+  cpu-stress:
+    build: .
+    cpuset: '3'
