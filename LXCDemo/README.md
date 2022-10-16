@@ -16,6 +16,7 @@
     - [Creating the nic device](#creating-the-nic-device)
     - [Create the containers](#create-the-containers)
   - [Moving containers between projects](#moving-containers-between-projects)
+  - [Clearing up](#clearing-up)
 
 
 ## Overview
@@ -32,6 +33,15 @@ Th- e projects feature is designed to help in this situation by providing the ab
 
 - *LXD snap installed and running (although we will cover this briefly if not)*
 - *You should know how to create and launch a LXD container*
+- *Install CRIU*
+
+    ```console
+    sudo apt-get update
+    ```
+
+    ```console
+    sudo apt -y install criu
+    ```
 
 ## Installing LXD Snap
 
@@ -381,3 +391,35 @@ lxc ls --project client2-website
 | webserver | RUNNING |      |      | PERSISTENT |           |
 +-----------+---------+------+------+------------+-----------+
 ```
+
+## Clearing up
+
+As a final task, lets clean up the containers and projects we created.
+
+You cannot remove a project that is in use, so we need to remove the containers and images first.
+
+```console
+lxc delete dbserver -f --project client2-website
+lxc delete dbserver2 -f --project client2-website
+lxc delete webserver -f --project client2-website
+```
+
+We also need to delete any images created in the project:
+
+```console
+lxc image list --project client2-website
+```
+
+For each image do:
+
+```console
+lxc image delete <fingerprint> --project client2-website
+```
+
+Then delete the project
+
+```console
+lxc project delete client2-website
+```
+
+Repeat these steps for the `client-website` project.
