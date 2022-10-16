@@ -54,21 +54,21 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    sudo git clone https://github.com/sfl0r3nz05/TelematicsNetworkDesign.git
-   cd ~/TelematicsNetworkDesign/DockerSecDemo/cgroups/cpu-stress
+   cd ~/TelematicsNetworkDesign/DockerSecDemo/cpu-stress
    ```
 
 3. Verify that the directory has a single `Dockerfile` and a single `docker-compose.yml` file.
 
-   ```
-   $ ls -l
+   ```console
+   ls -l
    -rw-r--r-- 1 root root 23 Jul 11 09:49 docker-compose.yml
    -rw-r--r-- 1 root root 85 Jul 11 09:49 Dockerfile
    ```
 
 4. Inspect the contents of the `Dockerfile`.
 
-   ```
-   $ cat Dockerfile
+   ```console
+   cat Dockerfile
    FROM ubuntu:latest
 
    RUN apt-get update && apt-get install -y stress
@@ -80,8 +80,8 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
 5. Build the image specified in the `Dockerfile`.
 
-   ```
-   $ sudo docker build -t cpu-stress .
+   ```console
+   sudo docker build -t cpu-stress .
    Sending build context to Docker daemon 3.072 kB
    Step 1 : FROM ubuntu:latest
    latest: Pulling from library/ubuntu
@@ -97,8 +97,8 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
 6. Run a new container called **stresser** based on the image built in the previous step.
 
-   ```
-   $ sudo docker run -d --name stresser cpu-stress
+   ```console
+   sudo docker run -d --name stresser cpu-stress
    stress: info: [5] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
 
    ```
@@ -107,14 +107,14 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
 7. View the impact of the container using the `htop` command.
 
-  ![](http://i.imgur.com/LB2yN0t.png)
+  ![img](http://i.imgur.com/LB2yN0t.png)
 
   The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
 
 8. Stop and remove the **stresser** container.
 
-   ```
-   $ sudo docker stop stresser && sudo docker rm stresser
+   ```console
+   sudo docker stop stresser && sudo docker rm stresser
 
    stresser
    stresser
@@ -129,8 +129,8 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 
 1. Run a new Docker container called **stresser** and restrict it to running on the first CPU on the system.
 
-   ```
-   $ sudo docker run -d --name stresser --cpuset-cpus 0 cpu-stress
+   ```console
+   sudo docker run -d --name stresser --cpuset-cpus 0 cpu-stress
 
    0bfbf2d33516065bbcfa56bd8f9df24749312460141bca729f53d66a9b2dba6b
    ```
@@ -161,20 +161,20 @@ In this step you will use the `docker run` command with the `--cpu-shares` flag 
 
 1. Start the first container with 768 CPU shares.
 
-   ```
-   $ sudo docker run -d --name container-1 --cpuset-cpus 0 --cpu-shares 768 cpu-stress
+   ```console
+   sudo docker run -d --name container-1 --cpuset-cpus 0 --cpu-shares 768 cpu-stress
    ```
 
 2. Start the second container with 256 CPU shares.
 
-   ```
-   $ sudo docker run -d --name container-2 --cpuset-cpus 0 --cpu-shares 256 cpu-stress
+   ```console
+   sudo docker run -d --name container-2 --cpuset-cpus 0 --cpu-shares 256 cpu-stress
    ```
 
 3. Verify that both containers are running with the `docker ps` command.
 
-   ```
-   $ sudo docker ps
+   ```console
+   sudo docker ps
 
    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
    725dc16fac5a        cpu-stress          "/bin/sh -c 'stress -"   2 minutes ago       Up 2 minutes                            container-2
@@ -183,7 +183,7 @@ In this step you will use the `docker run` command with the `--cpu-shares` flag 
 
 4. View the output of `htop`.
 
-  ![](http://i.imgur.com/zRqkQHt.png)
+  ![img](http://i.imgur.com/zRqkQHt.png)
 
   Notice two things about the `htop` output. First, only a single CPU is being maxed out. Second, there are four `stress` processes running. The first two in the list equate to ~75% of CPU time, and the second two equate to ~25% of CPU time.
 
@@ -207,7 +207,7 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
      cpuset: '3'
    ```
 
-  The above `docker-compose.yml` file will ensure that containers based from it will run on CPU core #3. You will obviously need a Docker Host with at least 4 CPU cores for this to work.
+      The above `docker-compose.yml` file will ensure that containers based from it will run on CPU core #3. You will obviously need a Docker Host with at least 4 CPU cores for this to work.
 
 2. Bring the application up in the background.
 
@@ -219,7 +219,7 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
 
 3. Run `htop` to see the effect of the `cpuset` parameter.
 
-  ![](http://i.imgur.com/DsCOSSB.png)
+  ![img](http://i.imgur.com/DsCOSSB.png)
 
   The `htop` output above shows the container and it's two `stress` processes locked to CPU core 4 (`cpuset` in Docker Compose indexes CPU cores starting at 0 whereas `htop` indexes CPU cores starting at 1).
 
@@ -245,7 +245,7 @@ In this step you will use the `--pids-limit` flag to limit the number of process
    root@c0eb76d2481c:/#
    ```
 
-  **Do not proceed to the next step** if you receive the following warning about pids limit support - *"WARNING: Your kernel does not support pids limit capabilities, pids limit discarded"*. If you receive this warning, you can [watch the demo](https://asciinema.org/a/dewdpjlzom4zasdz0c0c46jt9) as a video instead.
+   **Do not proceed to the next step** if you receive the following warning about pids limit support - *"WARNING: Your kernel does not support pids limit capabilities, pids limit discarded"*. If you receive this warning, you can [watch the demo](https://asciinema.org/a/dewdpjlzom4zasdz0c0c46jt9) as a video instead.
 
 2. Run the following command to create a fork bomb in the container you just started.
 
