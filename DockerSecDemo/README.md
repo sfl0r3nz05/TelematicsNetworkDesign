@@ -61,6 +61,11 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    ls -l
+   ```
+
+   - Output:
+
+   ```console
    -rw-r--r-- 1 root root 23 Jul 11 09:49 docker-compose.yml
    -rw-r--r-- 1 root root 85 Jul 11 09:49 Dockerfile
    ```
@@ -70,6 +75,8 @@ In this step you'll start a new container that will max out two CPU cores. You w
    ```console
    cat Dockerfile
    ```
+
+   - Output:
 
    ```console  
    FROM ubuntu:latest
@@ -84,7 +91,9 @@ In this step you'll start a new container that will max out two CPU cores. You w
    ```console
    sudo docker build -t cpu-stress .
    ```
-   
+
+   - Output:
+
    ```console
    Sending build context to Docker daemon 3.072 kB
    Step 1 : FROM ubuntu:latest
@@ -102,8 +111,14 @@ In this step you'll start a new container that will max out two CPU cores. You w
 6. Run a new container called **stresser** based on the image built in the previous step.
 
    ```console
-   sudo docker run -d --name stresser cpu-stress
+   docker run -d --name stresser cpu-stress
    ```
+
+   ```console
+   docker logs 9f89a222e7a1
+   ```
+
+   - Output:
 
    ```console
    stress: info: [5] dispatching hogs: 2 cpu, 0 io, 0 vm, 0 hdd
@@ -121,7 +136,11 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    ```console
    sudo docker stop stresser && sudo docker rm stresser
+   ```
 
+   - Output:
+
+   ```console
    stresser
    stresser
    ```
@@ -136,7 +155,11 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 
    ```console
    sudo docker run -d --name stresser --cpuset-cpus 0 cpu-stress
+   ```
 
+   - Output:
+
+   ```console
    0bfbf2d33516065bbcfa56bd8f9df24749312460141bca729f53d66a9b2dba6b
    ```
 
