@@ -144,7 +144,7 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 
 2. Run the `htop` command to see the impact the container is having on the Docker Host.
 
-  ![img](http://i.imgur.com/IJP31bP.png)
+   ![img](http://i.imgur.com/IJP31bP.png)
 
    There are a few things worth noting about what you have just done:
 
