@@ -258,6 +258,12 @@ We now are able to see 3 projects:
 +-------------------+--------+----------+-----------------+----------+---------------------+---------+
 ```
 
+We are changing the project again:
+
+```console
+lxc project switch client2-website
+```
+
 Now lets create a container in the new project:
 
 ```console
