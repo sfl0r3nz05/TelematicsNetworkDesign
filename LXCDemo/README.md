@@ -8,6 +8,8 @@
   - [Creating containers in our project](#creating-containers-in-our-project)
   - [Listing projects](#listing-projects)
   - [Listing containers in a project](#listing-containers-in-a-project)
+  - [Creating further isolated projects](#creating-further-isolated-projects)
+    - [A new client project](#a-new-client-project)
 
 
 ## Overview
@@ -67,7 +69,7 @@ Projects help us in this situation because we can create a project called client
 lxc project create client-website -c features.images=false -c features.profiles=false
 ```
 
-In the above command we have passed the `-c features.images=false` and `-c features.profiles=false` flags so that our new project will still use the images and profiles of the default project and will not namespace them (we’ll come onto that some more later in the tutorial).
+In the above command we have passed the `-c features.images=false` and `-c features.profiles=false` flags so that our new project will still use the images and profiles of the default project and will not namespace them (we’ll come onto that some more later in this demo).
 
 Now we switch the lxc tool into that project.
 
@@ -142,7 +144,7 @@ Let’s switch back to the default project (this is the project that LXD uses no
 lxc project switch default
 ```
 
-To prove that we can create a container of the same name as one in another project, lets create another webserver container:
+To prove that we can create a container of the same name as one in another project, lets create another `webserver` container:
 
 ```console
 lxc launch ubuntu:18.04 webserver
@@ -154,7 +156,7 @@ Now lets list our containers in the current default project:
 lxc ls
 ```
 
-You should expect to see a list of all of your existing containers, including the webserver we just created. Importantly, however, the list should not contain the two client-website containers we created earlier.
+You should expect to see a list of all of your existing containers, including the webserver we just created. Importantly, however, the list should not contain the two `client-website` containers we created earlier.
 
 ```console
 +-----------+---------+----------------------+-----------------------------------------------+------------+-----------+
@@ -187,3 +189,49 @@ This should give you the output:
 
 You can see that we now have 2 containers called `webserver`, but with different IP addresses and inside different projects.
 
+## Creating further isolated projects
+
+So far we have created a project that allowed containers of the same name to be created in different projects.
+
+However both the `default` and `client-website` projects shared the same profiles and image libraries.
+
+This means that the the `default` profile in client-website project is the same as the `default` profile in the `default` project.
+
+But there are scenarios where we may want to further isolate a project such that profile and image names are not shared beyond it.
+
+### A new client project
+
+Lets imagine we have now taken on a new client and we need to create a new project for them. However this client requires a different network configuration than the previous client required.
+
+We could create a new global profile called `client2-default` with the required networking configuration and then assign that profile to the containers in this new project.
+
+However this would mean that the `client2-default` profile would be accessible to all containers that shared the `default` project (including our previously created client-website project). This would be confusing.
+
+Instead, lets create a new project called `client2-website`, but this time specify that it should not share the `default` project’s profiles and image library.
+
+```console
+lxc project create client2-website -c features.images=true -c features.profiles=true
+```
+
+This is equivalent to running just:
+
+```console
+lxc project create client2-website
+```
+
+Now lets create a container in the new project:
+
+```console
+lxc launch ubuntu:18.04 webserver --project client2-website
+```
+
+***Note**: We are using the --project flag on the lxc launch command to save switching into the new project.*
+
+Oops! Something went wrong though, you will get this output:
+
+```console
+Creating webserver
+Error: Failed container creation: Create container: Create LXC container: Invalid devices: Detect root disk device: No root device could be found
+```
+
+Continue to the next step to find out what is going wrong!
