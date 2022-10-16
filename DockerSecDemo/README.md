@@ -53,7 +53,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 2. Clone GitHub repo locally on your Docker Host and change into the `cgroups/cpu-stress` directory.
 
    ```console
-   sudo git clone https://github.com/sfl0r3nz05/TelematicsNetworkDesign.git
+   git clone https://github.com/sfl0r3nz05/TelematicsNetworkDesign.git
    cd ~/TelematicsNetworkDesign/DockerSecDemo/cpu-stress
    ```
 
@@ -89,7 +89,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 5. Build the image specified in the `Dockerfile`.
 
    ```console
-   sudo docker build -t cpu-stress .
+   docker build -t cpu-stress .
    ```
 
    - Output:
@@ -135,7 +135,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 8. Stop and remove the **stresser** container.
 
    ```console
-   sudo docker stop stresser && sudo docker rm stresser
+   docker stop stresser && docker rm stresser
    ```
 
    - Output:
@@ -154,7 +154,7 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 1. Run a new Docker container called **stresser** and restrict it to running on the first CPU on the system.
 
    ```console
-   sudo docker run -d --name stresser --cpuset-cpus 0 cpu-stress
+   docker run -d --name stresser --cpuset-cpus 0 cpu-stress
    ```
 
    - Output:
@@ -178,6 +178,12 @@ Docker makes it possible to restrict containers to a particular CPU core, or set
 
 You have seen how to lock a container to a executing on a single CPU core on the Docker Host. Feel free to experiment further with the `--cpuset-cpus` flag.
 
+
+   ```console
+   docker stop container-1 && docker rm container-1
+   docker stop container-2 && docker rm container-2
+   ```
+
 ## Set CPU share constraints
 
 By default, all containers get an equal share of time executing on the Docker Host's CPUs. This allocation of time can be modified by changing the container’s CPU share weighting relative to the weighting of all other running containers.
@@ -191,20 +197,24 @@ In this step you will use the `docker run` command with the `--cpu-shares` flag 
 1. Start the first container with 768 CPU shares.
 
    ```console
-   sudo docker run -d --name container-1 --cpuset-cpus 0 --cpu-shares 768 cpu-stress
+   docker run -d --name container-1 --cpuset-cpus 0 --cpu-shares 768 cpu-stress
    ```
 
 2. Start the second container with 256 CPU shares.
 
    ```console
-   sudo docker run -d --name container-2 --cpuset-cpus 0 --cpu-shares 256 cpu-stress
+   docker run -d --name container-2 --cpuset-cpus 0 --cpu-shares 256 cpu-stress
    ```
 
 3. Verify that both containers are running with the `docker ps` command.
 
    ```console
-   sudo docker ps
+   docker ps
+   ```
 
+   - Output:
+
+   ```console
    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
    725dc16fac5a        cpu-stress          "/bin/sh -c 'stress -"   2 minutes ago       Up 2 minutes                            container-2
    f82f95757d3f        cpu-stress          "/bin/sh -c 'stress -"   2 minutes ago       Up 2 minutes                            container-1
@@ -241,8 +251,12 @@ Make sure you are in the `dockercon-workshop/cgroups/cpu-stress` directory of th
 2. Bring the application up in the background.
 
      ```console
-     $ sudo docker-compose up -d
+     docker-compose up -d
+     ```
 
+   - Output:
+
+     ```console
      Creating cpustress_cpu-stress_1
      ```
 
@@ -263,8 +277,12 @@ In this step you will use the `--pids-limit` flag to limit the number of process
 1. Start a new container and limit the number of processes it can create to 200 with the following command.
 
    ```console
-   $ sudo docker run --rm -it --pids-limit 200 debian:jessie bash
+   docker run --rm -it --pids-limit 200 debian:jessie bash
+   ```
 
+   - Output:
+
+   ```console
    Unable to find image 'debian:jessie' locally
    jessie: Pulling from library/debian
    5c90d4a2d1a8: Pull complete
