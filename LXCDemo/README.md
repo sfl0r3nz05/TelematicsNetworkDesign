@@ -10,6 +10,12 @@
   - [Listing containers in a project](#listing-containers-in-a-project)
   - [Creating further isolated projects](#creating-further-isolated-projects)
     - [A new client project](#a-new-client-project)
+  - [Setting up a new project profile](#setting-up-a-new-project-profile)
+    - [Comparing profiles](#comparing-profiles)
+    - [Creating the disk device](#creating-the-disk-device)
+    - [Creating the nic device](#creating-the-nic-device)
+    - [Create the containers](#create-the-containers)
+  - [Moving containers between projects](#moving-containers-between-projects)
 
 
 ## Overview
@@ -225,7 +231,7 @@ Now lets create a container in the new project:
 lxc launch ubuntu:18.04 webserver --project client2-website
 ```
 
-***Note**: We are using the --project flag on the lxc launch command to save switching into the new project.*
+***Note**:* *We are using the --project flag on the lxc launch command to save switching into the new project.*
 
 Oops! Something went wrong though, you will get this output:
 
@@ -235,3 +241,143 @@ Error: Failed container creation: Create container: Create LXC container: Invali
 ```
 
 Continue to the next step to find out what is going wrong!
+
+## Setting up a new project profile
+
+In the last step we created a new isolated project and then tried to create a new container inside it. Unfortunately we were unable to because we got a `No root device could be found error`. This is because the default profile within the new project has not been configured yet.
+
+Lets do so now…
+
+### Comparing profiles
+
+First, we can compare the `default` profile from our `default` project:
+
+```console
+lxc profile show default --project default
+```
+
+```console
+config: {}
+description: Default LXD profile
+devices:
+  eth0:
+    name: eth0
+    nictype: bridged
+    parent: lxdbr0
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+name: default
+used_by:
+- /1.0/containers/tutorials
+- /1.0/containers/webserver?project=client-website
+- /1.0/containers/dbserver?project=client-website
+- /1.0/containers/webserver
+```
+
+With the `default` profile in the `client2-website` project:
+
+```console
+lxc profile show default --project client2-website
+```
+
+```console
+config: {}
+description: Default LXD profile for project client2-website
+devices: {}
+name: default
+used_by: []
+```
+
+We can see that the missing configuration is for the devices section, specifically the nic and disk devices.
+
+### Creating the disk device
+
+Lets add a root disk device sharing the global default storage pool:
+
+```console
+lxc profile device add default root disk path=/ pool=default --project client2-website
+```
+
+### Creating the nic device
+
+Next we add an `eth0` nic device to the default profile:
+
+```console
+lxc profile device add default eth0 nic name=eth0 nictype=p2p --project client2-website
+```
+
+***Note:*** *We have changed the networking config for this nic device to be p2p rather than bridge to demonstrate the ability to have different default profiles in separate projects.*
+
+### Create the containers
+
+Now lets try again to create the containers for this project:
+
+```console
+lxc launch ubuntu:18.04 webserver --project client2-website
+lxc launch ubuntu:18.04 dbserver --project client2-website
+```
+
+And check they are created:
+
+```console
+lxc ls --project client2-website
+```
+
+```console
++-----------+---------+------+------+------------+-----------+
+|   NAME    |  STATE  | IPV4 | IPV6 |    TYPE    | SNAPSHOTS |
++-----------+---------+------+------+------------+-----------+
+| dbserver  | RUNNING |      |      | PERSISTENT |           |
++-----------+---------+------+------+------------+-----------+
+| webserver | RUNNING |      |      | PERSISTENT |           |
++-----------+---------+------+------+------------+-----------+
+```
+
+## Moving containers between projects
+
+So far we have seen how containers can be grouped together and isolated to varying levels.
+
+The last feature we can explore is how to move a container from one project to another.
+
+Lets move the `dbserver` from client-website project into the `client2-website` project.
+
+```console
+lxc move dbserver dbserver --project client-website --target-project client2-website
+```
+
+But we have got an error again:
+
+```console
+Error: Add container info to the database: This container already exists
+```
+
+This is because you cannot have 2 containers with the same name existing in the same project, and we already have a container called `dbserver` in project `client2-website`.
+
+There are two courses of action here; either delete the existing `dbserver` container, or move the container into the project using a different name.
+
+We’ll choose the latter option in this tutorial.
+
+```console
+lxc move dbserver dbserver2 --project client-website --target-project client2-website
+```
+
+Now lets confirm that the container has been moved:
+
+```console
+lxc ls --project client2-website
+```
+
+```console
++-----------+---------+------+------+------------+-----------+
+|   NAME    |  STATE  | IPV4 | IPV6 |    TYPE    | SNAPSHOTS |
++-----------+---------+------+------+------------+-----------+
+| dbserver  | RUNNING |      |      | PERSISTENT |           |
++-----------+---------+------+------+------------+-----------+
+| dbserver2 | STOPPED |      |      | PERSISTENT |           |
++-----------+---------+------+------+------------+-----------+
+| webserver | RUNNING |      |      | PERSISTENT |           |
++-----------+---------+------+------+------------+-----------+
+```
