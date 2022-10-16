@@ -42,7 +42,11 @@ Th- e projects feature is designed to help in this situation by providing the ab
     ```console
     sudo apt -y install criu
     ```
-
+    
+    ```console
+    snap set lxd criu.enable=true
+    ```
+    
 ## Installing LXD Snap
 
 We will need LXD installed and running before we can use it to create a project.
