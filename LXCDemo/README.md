@@ -99,6 +99,12 @@ Let’s check that we have switched to the new empty project:
 lxc project ls
 ```
 
+If we list lxc containers:
+
+```console
+lxc ls
+```
+
 We would expect to see an empty list at this point.
 
 ## Creating containers in our project
