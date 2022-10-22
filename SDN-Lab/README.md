@@ -2,19 +2,21 @@
 
 ## Prerequisitos
 
-1. [Desplegar el servidor GNS3](../GNS3ServerDeployment/README.md)
+1. Crear 2 instancias en aws una `t2.medium` y una `t2.large`:
+   1. Renombrar la instancia `t2.medium` como *SDN-Controller*.
+   2. Renombrar la instancia `t2.large` como *GNS3-Server*.
+2. Desplegar el servidor GNS3 en la instancia `t2.large`(*GNS3-Server*) siguiendo la siguiente [documentación](../GNS3ServerDeployment/README.md)
 
-## Despliegue de la Red SDN
+## Despliegue del controlador SDN
 
-1. Obtención de programas y preconfiguraciones. [Getting Started](./GETTINGSTARTED.md)
-
-2. Controlador SDN. [Controlador](./Controlador/CONTROLADOR.md)
+1. Desplegar el Controlador SDN en la instancia `t2.medium` siguiendo la siguiente [documentación](./controller/controller.md)
   
-      2.1 OpenDayLight
+
+2. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
+
+
       
-      2.2 OpenFlowApp
-      
-  3. Red GNS3. [Red GNS3](./RedGNS3/REDGNS3.md)
+  1. Red GNS3. [Red GNS3](./RedGNS3/REDGNS3.md)
   
       3.1 OpenVSwitch + Conexión controlador
       
@@ -22,7 +24,7 @@
       
       3.3 Introducción en la red de router atacante
       
-  4. Ataque. [Ataque](./Ataque/ATAQUE.md)
+  2. Ataque. [Ataque](./Ataque/ATAQUE.md)
   
       4.1 Adaptación de ataque
       
