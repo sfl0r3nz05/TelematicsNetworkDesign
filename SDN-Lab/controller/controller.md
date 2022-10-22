@@ -3,7 +3,6 @@
 - [Controller installation](#controller-installation)
   - [Prerequisitos](#prerequisitos)
   - [Desplegar OpenDayLight](#desplegar-opendaylight)
-  - [OpenFlow App](#openflow-app)
 
 Esta sección establece los procedimientos para descargar y configurar el controlador.
 
@@ -100,36 +99,3 @@ Esta sección establece los procedimientos para descargar y configurar el contro
           ```
 
           ![image](./img/OpenDaylight.png)
-
-## OpenFlow App
-
-- El siguiente paso será la instalación del OpenFlow Manager y su posterior conexión con ODL.
-
-1. Instala NodeJS:
-
-     ```console
-     sudo apt-get install -y npm
-     sudo apt-get install -y nodejs
-     ```
-
-2. Se clona el repositorio de GitHub:
-
-     ```console
-     git clone https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
-     ```
-
-3. Se edita el fichero ubicado en ofm/src/common/config y cambiarle el campo `baseURL`. 
-   1. Tal y como se puede observar en la siguiente figura, se le añade  después de `http` la `IP_publica` de la máquina donde tenemos descargado ODL, con lo cual estaremos apuntando hacia ODL y podremos hacer la conexión con él, con el objetivo de obtener la topología y de que el OFM pueda hacer el control sobre el tráfico
-
-     ![image](https://user-images.githubusercontent.com/98832318/192136644-6594b676-d92a-4856-8df8-870812f2ccde.png)
-
-4. Se ejecutará el comando grunt.
-
-     ```console
-     cd OpenFlowApp
-     grunt
-     ```
-
-5. Ejecutará el programa y abrirá una conexión en localhost:9000 donde podremos ver algo como lo de la siguiente figura.
-
-     ![image](https://user-images.githubusercontent.com/98832318/192136666-20fab8e6-651a-4d88-b4d8-2cfd1fe458e8.png)
