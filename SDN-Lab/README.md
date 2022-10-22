@@ -9,10 +9,11 @@
 
 ## Despliegue del controlador SDN
 
-1. Desplegar el Controlador SDN en la instancia `t2.medium` siguiendo la siguiente [documentación](./controller/controller.md)
+1. Desplegar el *Controlador SDN* en la instancia `t2.medium` siguiendo la siguiente [documentación](./controller/controller.md)
   
+## Despliegue de la red sobre GNS3
 
-2. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
+1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
 
 
       

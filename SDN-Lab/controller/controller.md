@@ -1,19 +1,30 @@
-# Introducción
-En esta parte se va a explicar como proceder para descargar y configurar los programas que correspondinetes a la parte del controlador.
+# Controller installation
 
-Estando activa la instancia 2, nos conectamos mediante VisualStudio Code, lanzamos un terminal y empezamos a descargar los programas.
+Esta sección establece los procedimientos para descargar y configurar el controlador.
 
-# OpenDayLight
-Empezando por el controlador OpenDayLight, se requerirán unos ciertos requisitos antes de la instalación del programa. 
+## Prerequisitos
 
-```
+- Tener la instancia `t2.medium` (*SDN-Controller*) desplegada
+- Conexión a dicha instancia vía `ssh`.
+
+## Prerequisitos OpenDayLight
+
+> Note: The OpenDaylight Project is a collaborative open-source project hosted by the Linux Foundation. The project serves as a platform for software-defined networking for open, centralized, computer network device monitoring.
+
+```console
 sudo apt-get -y update
 sudo apt-get -y upgrade
+```
+
+1. Instalar unzip.
+
+```console
 sudo apt-get -y install unzip
 ```
 
-Hace falta instalar el entorno Java JRE para que ODL funcione correctamente. 
-```
+2. Instalar el entorno Java JRE para que ODL funcione correctamente.
+
+```console
  sudo apt-get -y install openjdk-8-jre
  sudo update-alternatives --config java
 ```
