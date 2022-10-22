@@ -32,7 +32,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 3. Instalar el entorno Java JRE para que ODL funcione correctamente:
 
     ```console
-    sudo apt-get -y install openjdk-8-jre
+    sudo apt-get -y install openjdk-11-jre
     sudo update-alternatives --config java
     ```
 
@@ -42,7 +42,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 
         ```console
         ls -l /etc/alternatives/java
-        echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre' >> ~/.bashrc
+        echo 'export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64' >> ~/.bashrc
         source ~/.bashrc
         ```
 
@@ -57,24 +57,24 @@ Esta sección establece los procedimientos para descargar y configurar el contro
    - Haciendo uso del comando curl y posteriormente, descomprimiendo el archivo obtenemos el programa.
 
       ```console
-      curl -XGET -O https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/karaf/0.8.4/karaf-0.8.4.zip
-      unzip karaf-0.8.4.zip
+      curl -XGET -O https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/opendaylight/16.2.0/opendaylight-16.2.0.zip
+      unzip opendaylight-16.2.0.zip
       ```
 
 6. Lanzar el servicio:
 
     ```console
-    cd karaf-0.8.4/
+    cd opendaylight-16.2.0/
     ./bin/karaf
     ```
 
     - Una vez ejecutado el programa se debe observar en una aproxumación a lo que se muestra a continuación:
 
      ```console
-     ubuntu@ip-172-31-95-13:~/karaf-0.8.4$ ./bin/karaf
+     ubuntu@ip-172-31-95-13:~/opendaylight-16.2.0/bin$ ./karaf
      Apache Karaf starting up. Press Enter to open the shell now...
      100% [========================================================================]
-     Karaf started in 3s. Bundle stats: 54 active, 55 total
+     Karaf started in 0s. Bundle stats: 19 active, 19 total
 
           ________                       ________                .__  .__       .__     __
           \_____  \ ______   ____   ____ \______ \ _____  ___.__.|  | |__| ____ |  |___/  |_
