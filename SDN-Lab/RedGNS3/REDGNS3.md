@@ -1,7 +1,9 @@
-# Introducción
+# GNS3 Network Deployment
+
 Ahora pasaremos a desplegar nuestra red poco a poco. Lanzada la instancia1, abriremos el programa GNS3 y lo conectaremos con el servidor como ya se ha explicado. Iremos introduciendo los diferentes elementos que conformarán la red y aplicando las configuraciones pertinentes. Una vez completado el paso OpenVswitch + Conexión podremos decir que tenemos una red SDN. A partir de ahí, iremos introduciendo complejidad a la red y orientándolo hacia nuestro objetivo de desarrollar un ataque en ella.
 
 ## Familiarización
+
 Antes de empezar con partes de mayor complejidad será recomendable familiarizarnos con el entorno de GNS3. Nada más creado el proyecto podemos empezar a insertar objetos. 
 
 En los iconos de la parte izquierda de la pantalla podremos ver todos los dispositivos que se ofrecen por defecto. Para empezar, introduciremos dos routers. Es posible que haya alguno por defecto disponible, pero en modo de ilustración, veremos como importar una imágen de un dispositivo al programa. Será útil para proceder igual con otro tipo de dispositivos cuando sean necesarios.

@@ -146,7 +146,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      ```
 
 3. Se edita el fichero ubicado en ofm/src/common/config y cambiarle el campo `baseURL`. 
-   1. Tal y como se puede observar en la siguiente figura, se le añade  después de http:// la IP publica de la máquina donde tenemos descargado ODL, con lo cual estaremos apuntando hacia ODL y podremos hacer la conexión con él, con el objetivo de obtener la topología y de que el OFM pueda hacer el control sobre el tráfico
+   1. Tal y como se puede observar en la siguiente figura, se le añade  después de `http` la `IP_publica` de la máquina donde tenemos descargado ODL, con lo cual estaremos apuntando hacia ODL y podremos hacer la conexión con él, con el objetivo de obtener la topología y de que el OFM pueda hacer el control sobre el tráfico
 
      ![image](https://user-images.githubusercontent.com/98832318/192136644-6594b676-d92a-4856-8df8-870812f2ccde.png)
 
