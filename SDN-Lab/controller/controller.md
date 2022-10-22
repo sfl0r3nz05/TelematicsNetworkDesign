@@ -11,58 +11,69 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 
 > *Note:* The OpenDaylight Project is a collaborative open-source project hosted by the Linux Foundation. The project serves as a platform for software-defined networking for open, centralized, computer network device monitoring.
 
-```console
-sudo apt-get -y update
-sudo apt-get -y upgrade
-```
+1. Actualizar el Advanced Package Tool (APT):
 
-1. Instalar unzip.
+    ```console
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    ```
 
-```console
-sudo apt-get -y install unzip
-```
+2. Instalar unzip:
 
-2. Instalar el entorno Java JRE para que ODL funcione correctamente.
+    ```console
+    sudo apt-get -y install unzip
+    ```
 
-```console
- sudo apt-get -y install openjdk-8-jre
- sudo update-alternatives --config java
-```
+3. Instalar el entorno Java JRE para que ODL funcione correctamente:
 
-También habrá que establecer el JAVA_HOME. Primero se comprueba el directorio donde se encuentra y, posterirmente, se le aplican los cambios correspondietes.
+    ```console
+    sudo apt-get -y install openjdk-8-jre
+    sudo update-alternatives --config java
+    ```
 
-```
- ls -l /etc/alternatives/java
- echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre' >> ~/.bashrc
- source ~/.bashrc
- echo $JAVA_HOME (comprobación de que se ha realizado correctamente)
-```
+4. Set the `JAVA_HOME`.
 
-Una vez se haya establecido el entorno adecuado para el programa se procede con la instalación. Desde la página de ODL se escoge la versión de programa que se va a utilizar. En este caso se ha optado por la versión Beryllium 0.4.4. 
+   1. Primero se comprueba el directorio donde se encuentra y, posterirmente, se le aplican los cambios correspondietes.
 
-Haciendo uso del comando curl y posteriormente, descomprimiendo el archivo obtenemos el programa. 
+        ```console
+        ls -l /etc/alternatives/java
+        echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre' >> ~/.bashrc
+        source ~/.bashrc
+        ```
 
-```
-curl -XGET -O https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/karaf/0.8.4/karaf-0.8.4.zip
-unzip karaf-0.8.4.zip
-```
-Para correrlo
+   2. Comprobación de que se ha realizado correctamente:
 
-```
-cd karaf-0.8.4/
-./bin/karaf
-```
+        ```console
+        echo $JAVA_HOME
+        ```
 
-Una vez ejecutado el programa se verá algo como lo que se puede observar en la siguiente figura
-![image](https://user-images.githubusercontent.com/98832318/192136479-6ceabe3f-ecfd-40ab-9ae7-b1e2d9389a48.png)
+5. Una vez se haya establecido el entorno adecuado para el programa se procede con la instalación. Desde la página de ODL se escoge la versión de programa que se va a utilizar. En este caso se ha optado por la versión Beryllium 0.4.4.
+
+   - Haciendo uso del comando curl y posteriormente, descomprimiendo el archivo obtenemos el programa. 
+
+      ```console
+      curl -XGET -O https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/karaf/0.8.4/karaf-0.8.4.zip
+      unzip karaf-0.8.4.zip
+      ```
+
+6. Lanzar el servicio:
+
+    ```console
+    cd karaf-0.8.4/
+    ./bin/karaf
+    ```
+
+    - Una vez ejecutado el programa se debe observar en una aproxumación a lo que se muestra en la siguiente figura:
+
+      ![image](https://user-images.githubusercontent.com/98832318/192136479-6ceabe3f-ecfd-40ab-9ae7-b1e2d9389a48.png)
 
 Será necesario instalarse las siguientes funciones del programa:
   1. Odl-restconf-all
   2. Odl-openflowplugin-all
   3. Odl-l2switch-all
-  3. Odl-mdsal-all
-  4. Odl-yangtools-common
-  5. Odl-dlux-all
+  4. Odl-mdsal-all
+  5. Odl-yangtools-common
+  6. Odl-dlux-all
 
 Para descargarlas aplicar el siguiente comando
 ```
