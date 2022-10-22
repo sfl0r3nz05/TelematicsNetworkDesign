@@ -20,8 +20,7 @@
 
 1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
 
-
-      
+     
   1. Red GNS3. [Red GNS3](./RedGNS3/REDGNS3.md)
   
       3.1 OpenVSwitch + Conexión controlador
