@@ -71,24 +71,24 @@ Esta sección establece los procedimientos para descargar y configurar el contro
     - Una vez ejecutado el programa se debe observar en una aproxumación a lo que se muestra a continuación:
 
      ```console
-          ubuntu@ip-172-31-95-13:~/karaf-0.8.4$ ./bin/karaf
-          Apache Karaf starting up. Press Enter to open the shell now...
-          100% [========================================================================]
-          Karaf started in 3s. Bundle stats: 54 active, 55 total
+     ubuntu@ip-172-31-95-13:~/karaf-0.8.4$ ./bin/karaf
+     Apache Karaf starting up. Press Enter to open the shell now...
+     100% [========================================================================]
+     Karaf started in 3s. Bundle stats: 54 active, 55 total
 
-              ________                       ________                .__  .__       .__     __
-              \_____  \ ______   ____   ____ \______ \ _____  ___.__.|  | |__| ____ |  |___/  |_
-               /   |   \\____ \_/ __ \ /    \ |    |  \\__  \<   |  ||  | |  |/ ___\|  |  \   __\
-              /    |    \  |_> >  ___/|   |  \|    `   \/ __ \\___  ||  |_|  / /_/  >   Y  \  |
-              \_______  /   __/ \___  >___|  /_______  (____  / ____||____/__\___  /|___|  /__|
-                      \/|__|        \/     \/        \/     \/\/            /_____/      \/
+          ________                       ________                .__  .__       .__     __
+          \_____  \ ______   ____   ____ \______ \ _____  ___.__.|  | |__| ____ |  |___/  |_
+           /   |   \\____ \_/ __ \ /    \ |    |  \\__  \<   |  ||  | |  |/ ___\|  |  \   __\
+          /    |    \  |_> >  ___/|   |  \|    `   \/ __ \\___  ||  |_|  / /_/  >   Y  \  |
+          \_______  /   __/ \___  >___|  /_______  (____  / ____||____/__\___  /|___|  /__|
+                  \/|__|        \/     \/        \/     \/\/            /_____/      \/
 
 
-          Hit '<tab>' for a list of available commands
-          and '[cmd] --help' for help on a specific command.
-          Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown OpenDaylight.
+     Hit '<tab>' for a list of available commands
+     and '[cmd] --help' for help on a specific command.
+     Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown OpenDaylight.
 
-          opendaylight-user@root> 
+     opendaylight-user@root> 
      ```
 
 7. Será necesario instalarse las siguientes funciones desde la propia terminal `opendaylight-user@root>`:
