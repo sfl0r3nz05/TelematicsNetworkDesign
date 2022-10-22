@@ -5,11 +5,11 @@
 1. Crear 2 instancias en aws una `t2.medium` y una `t2.large`:
    1. Renombrar la instancia `t2.medium` como *SDN-Controller*.
    2. Renombrar la instancia `t2.large` como *GNS3-Server*.
-2. Desplegar el servidor GNS3 en la instancia `t2.large`(*GNS3-Server*) siguiendo la siguiente [documentación](../GNS3ServerDeployment/README.md)
+2. Desplegar el servidor GNS3 en la instancia `t2.large`(*GNS3-Server*) siguiendo la siguiente [documentación](../GNS3ServerDeployment/README.md).
 
 ## Despliegue del controlador SDN
 
-1. Desplegar el *Controlador SDN* en la instancia `t2.medium` siguiendo la siguiente [documentación](./controller/controller.md)
+1. Desplegar el *Controlador SDN* en la instancia `t2.medium` siguiendo la siguiente [documentación](./controller/controller.md).
   
 ## Despliegue de la red sobre GNS3
 

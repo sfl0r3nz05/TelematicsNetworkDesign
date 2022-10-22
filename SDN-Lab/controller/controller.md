@@ -9,7 +9,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 
 ## Prerequisitos OpenDayLight
 
-> Note: The OpenDaylight Project is a collaborative open-source project hosted by the Linux Foundation. The project serves as a platform for software-defined networking for open, centralized, computer network device monitoring.
+> *Note:* The OpenDaylight Project is a collaborative open-source project hosted by the Linux Foundation. The project serves as a platform for software-defined networking for open, centralized, computer network device monitoring.
 
 ```console
 sudo apt-get -y update
