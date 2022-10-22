@@ -49,7 +49,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 
 5. Una vez se haya establecido el entorno adecuado para el programa se procede con la instalación. Desde la página de ODL se escoge la versión de programa que se va a utilizar. En este caso se ha optado por la versión Beryllium 0.4.4.
 
-   - Haciendo uso del comando curl y posteriormente, descomprimiendo el archivo obtenemos el programa. 
+   - Haciendo uso del comando curl y posteriormente, descomprimiendo el archivo obtenemos el programa.
 
       ```console
       curl -XGET -O https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/karaf/0.8.4/karaf-0.8.4.zip
@@ -67,25 +67,52 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 
       ![image](https://user-images.githubusercontent.com/98832318/192136479-6ceabe3f-ecfd-40ab-9ae7-b1e2d9389a48.png)
 
-Será necesario instalarse las siguientes funciones del programa:
-  1. Odl-restconf-all
-  2. Odl-openflowplugin-all
-  3. Odl-l2switch-all
-  4. Odl-mdsal-all
-  5. Odl-yangtools-common
-  6. Odl-dlux-all
+7. Será necesario instalarse las siguientes funciones:
 
-Para descargarlas aplicar el siguiente comando
-```
-feature:install odl-restconf-all
-```
-Para ver la lista de las features
+   1. odl-restconf-all
 
-```
-feature:list
-```
+        ```console
+        feature:install odl-restconf-all
+        ```
 
-Una vez instalado el programa con todas sus funciones correctamente podremos ver como se abren unos ciertos puertos. En la siguiente figura se ve un ejemplo de los puertos abiertos usando la herramienta nmap.
+   2. odl-openflowplugin-all
+
+        ```console
+        feature:install odl-openflowplugin-all
+        ```
+
+   3. odl-l2switch-all
+
+        ```console
+        feature:install odl-l2switch-all
+        ```
+
+   4. odl-mdsal-all
+
+        ```console
+        feature:install odl-mdsal-all
+        ```
+
+   5. odl-yangtools-common
+
+        ```console
+        feature:install odl-yangtools-common
+        ```
+
+   6. odl-dlux-all
+
+        ```console
+        feature:install odl-dlux-all
+        ```
+
+8. Para verificar la lista de las features:
+
+    ```console
+    feature:list
+    ```
+
+9. Una vez instalado `OpenDaylight`, así como todas sus `funciones` correctamente podremos ver como se abren unos ciertos puertos. 
+   1.  En la siguiente figura se ve un ejemplo de los puertos abiertos usando la herramienta `nmap`:
 
 Si por un navegador accedemos a http:// 35.174.155.88:8181/index.html#/login (introducir ip pública de la instancia correspondiente al controlador) podremos ver lo siguiente. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
 Username: admin
