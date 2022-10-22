@@ -1,5 +1,10 @@
 # Controller installation
 
+- [Controller installation](#controller-installation)
+  - [Prerequisitos](#prerequisitos)
+  - [Prerequisitos OpenDayLight](#prerequisitos-opendaylight)
+  - [OpenFlow App](#openflow-app)
+
 Esta sección establece los procedimientos para descargar y configurar el controlador.
 
 ## Prerequisitos
@@ -111,42 +116,47 @@ Esta sección establece los procedimientos para descargar y configurar el contro
     feature:list
     ```
 
-9. Una vez instalado `OpenDaylight`, así como todas sus `funciones` correctamente podremos ver como se abren unos ciertos puertos. 
-   1.  En la siguiente figura se ve un ejemplo de los puertos abiertos usando la herramienta `nmap`:
+9. Una vez instalado `OpenDaylight`, así como todas sus `funciones` correctamente podremos ver como se abren unos ciertos puertos como el `8081`.
 
-Si por un navegador accedemos a http:// 35.174.155.88:8181/index.html#/login (introducir ip pública de la instancia correspondiente al controlador) podremos ver lo siguiente. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
-Username: admin
-Password: admin
+10. A través del navegador, y usando la IP pública de la instancia (e.g.: http:// 35.174.155.88:8181/index.html#/login) podremos ver la interfaz web del controller.
+    1. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
 
-![image](https://user-images.githubusercontent.com/98832318/192136488-7e166ea5-fba4-42c7-a765-0332f6d96499.png)
+          ```console
+          Username: admin
+          Password: admin
+          ```
 
-# OpenFlow App
+          ![image](https://user-images.githubusercontent.com/98832318/192136488-7e166ea5-fba4-42c7-a765-0332f6d96499.png)
 
-El siguiente paso será la instalación del OpenFlow Manager y su posterior conexión con ODL. Para esto será necesario descargarse un par de funciones previas que aseguran el funcionamiento correcto. Con este objetivo se han ejecutado los siguientes comandos.
+## OpenFlow App
 
-```
-sudo apt-get install -y npm
-sudo apt-get install -y nodejs
-```
+- El siguiente paso será la instalación del OpenFlow Manager y su posterior conexión con ODL.
 
-A continuación, se clona el repositorio de GitHub
+1. Instala NodeJS:
 
-```
-git clone https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
-```
+     ```console
+     sudo apt-get install -y npm
+     sudo apt-get install -y nodejs
+     ```
 
-Habrá que editar el fichero ubicado en ofm/src/common/config y cambiarle el campo baseURL. Tal y como se puede observar en la siguiente figura, se le añade  después de http:// la IP publica de la máquina donde tenemos descargado ODL. 
+2. Se clona el repositorio de GitHub:
 
-Haciendo esto estaremos apuntando hacia ODL y podremos hacer la conexión con él, con el objetivo de obtener la topología y de que el OFM pueda hacer el control sobre el tráfico
+     ```console
+     git clone https://github.com/CiscoDevNet/OpenDaylight-Openflow-App
+     ```
 
-![image](https://user-images.githubusercontent.com/98832318/192136644-6594b676-d92a-4856-8df8-870812f2ccde.png)
+3. Se edita el fichero ubicado en ofm/src/common/config y cambiarle el campo `baseURL`. 
+   1. Tal y como se puede observar en la siguiente figura, se le añade  después de http:// la IP publica de la máquina donde tenemos descargado ODL, con lo cual estaremos apuntando hacia ODL y podremos hacer la conexión con él, con el objetivo de obtener la topología y de que el OFM pueda hacer el control sobre el tráfico
 
-Una vez configurado el programa, se ejecutará el comando grunt.
+     ![image](https://user-images.githubusercontent.com/98832318/192136644-6594b676-d92a-4856-8df8-870812f2ccde.png)
 
-```
-cd OpenFlowApp
-grunt
-```
-Ejecutará el programa y abrirá una conexión en localhost:9000 donde podremos ver algo como lo de la siguiente figura.
+4. Se ejecutará el comando grunt.
 
-![image](https://user-images.githubusercontent.com/98832318/192136666-20fab8e6-651a-4d88-b4d8-2cfd1fe458e8.png)
+     ```console
+     cd OpenFlowApp
+     grunt
+     ```
+
+5. Ejecutará el programa y abrirá una conexión en localhost:9000 donde podremos ver algo como lo de la siguiente figura.
+
+     ![image](https://user-images.githubusercontent.com/98832318/192136666-20fab8e6-651a-4d88-b4d8-2cfd1fe458e8.png)
