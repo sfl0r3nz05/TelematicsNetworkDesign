@@ -91,39 +91,53 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      opendaylight-user@root> 
      ```
 
-7. Será necesario instalarse las siguientes funciones desde la propia terminal `opendaylight-user@root>`:
+7. Install the Karaf feature
 
-   1. odl-restconf-all
+     - To install a feature, use the following command, where feature1 is the feature name listed in the table below:
+
+          ```console
+          feature:install <feature1>
+          ```
+
+     - You can install multiple features using the following command:
+
+          ```console
+          feature:install <feature1> <feature2> ... <featureN-name>
+          ```
+
+   1. Será necesario instalarse las siguientes funciones desde la propia terminal `opendaylight-user@root>`:
+
+   2. odl-restconf-all
 
         ```console
         feature:install odl-restconf-all
         ```
 
-   2. odl-openflowplugin-all
+   3. odl-openflowplugin-all
 
         ```console
         feature:install odl-openflowplugin-all
         ```
 
-   3. odl-l2switch-all
+   4. odl-l2switch-all
 
         ```console
         feature:install odl-l2switch-all
         ```
 
-   4. odl-mdsal-all
+   5. odl-mdsal-all
 
         ```console
         feature:install odl-mdsal-all
         ```
 
-   5. odl-yangtools-common
+   6. odl-yangtools-common
 
         ```console
         feature:install odl-yangtools-common
         ```
 
-   6. odl-dlux-all
+   7. odl-dlux-all
 
         ```console
         feature:install odl-dlux-all
@@ -135,7 +149,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
     feature:list
     ```
 
-9. Una vez instalado `OpenDaylight`, así como todas sus `funciones` correctamente podremos ver como se abren unos ciertos puertos como el `8081`.
+9.  Una vez instalado `OpenDaylight`, así como todas sus `funciones` correctamente podremos ver como se abren unos ciertos puertos como el `8081`.
 
 10. A través del navegador, y usando la IP pública de la instancia (e.g.: http:// 35.174.155.88:8181/index.html#/login) podremos ver la interfaz web del controller.
     1. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
