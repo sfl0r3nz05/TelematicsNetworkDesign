@@ -85,7 +85,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
     feature:list
     ```
 
-5. `OpenDaylight` exposed TCP ports:
+5. `OpenDaylight` exposed TCP ports in AWS inbound rules:
    - `6633` Openflow,
    - `8101` Karaf CLI via SSH (see below),
    - `8181` RESTCONF / HTTP
