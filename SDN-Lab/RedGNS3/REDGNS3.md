@@ -6,7 +6,7 @@
   - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
     - [Configuración de interfaces en enrutadores](#configuración-de-interfaces-en-enrutadores)
     - [Configuración de OSPF en los enrutadores](#configuración-de-ospf-en-los-enrutadores)
-    - [Configuración de OpenVswitch](#configuración-de-openvswitch)
+    - [Acceso de OpenVSwitch a internet](#acceso-de-openvswitch-a-internet)
 - [Expansión de red](#expansión-de-red)
   - [Router](#router)
   - [Host](#host)
@@ -172,7 +172,6 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   configure terminal
   router ospf 1
   network 10.0.0.0 0.255.255.255 area 0
-  default-information originate
   end
   ```
 
@@ -203,19 +202,44 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   10.1.4.1          1   FULL/DR         00:00:31    10.1.2.2        FastEthernet0/1
   ```
 
-### Configuración de OpenVswitch
+### Acceso de OpenVSwitch a internet
+
+En este paso se debe habilitar el acceso del `OpenVSwitch` a internet de manera que pueda conectarse al controlador SDN.
+
+Como se muestra en la siguiente figura se debe:
+
+1. Seleccionar los end devices en el cliente GNS3.
+2. Arrastrar el Cloud hacia el proyecto.
+3. Doble clic encima del ícono de la nube.
+4. Habilita el checkbox `show special interfaces`.
+5. Seleccionar y agregar la interfaz `virbr0`.
+6. Conectar la interfaz `eth0` del `OpenVSwitch` a la `virbr0` de la nube.
+
+    <img src="./img/9.PNG"  width="60%" height="30%">
+
+7. Inspeccionar las interfaces de la instancia de AWS vía `ip addr` para verificar que la interfaz `virbr0` esté habilitada.
+
+    ```console
+    3: virbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+      link/ether 52:54:00:45:6a:2e brd ff:ff:ff:ff:ff:ff
+      inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+         valid_lft forever preferred_lft forever
+    ```
+
+8. Una vez conocida la IP de la interfaz de red, se procede a configurar OVS para tener acceso a internet, y, por consiguiente, a la instancia donde estará desplegado el controlador. Para conseguir esto se requieren dar dos pasos: asignarle una IP adecuada a la interfaz eth0 y abrir un gateway hacia la interfaz de red que dará acceso a internet
+
+```console
+ifconfig eth0  192.168.127.101
+ip route add default via 192.168.122.1
+```
 
 Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed.
 
 Después, se añade al proyecto y se le tiene que dar acceso a internet para que pueda hacerse la conexión con el controlador.
 Para conectar el OVS a internet hay que añadir una cloud al proyecto. Es importante acceder a la configuración de la cloud y añadirle en las conexiones la interfaz de red virbr0. A continuación, se debe conectar la interfaz del switch eth0 con la nube mediante la mencionada virbr0. Se puede revisar en el terminal la IP correspondiente a esta interfaz de red.
 
-Una vez conocida la IP de la interfaz de red, se procede a configurar OVS para tener acceso a internet, y, por consiguiente, a la instancia donde estará desplegado el controlador. Para conseguir esto se requieren dar dos pasos: asignarle una IP adecuada a la interfaz eth0 y abrir un gateway hacia la interfaz de red que dará acceso a internet
 
-```
-ifconfig eth0 192.168.122.20
-ip route add default via 192.168.122.1
-```
+
 Se comprobará la conexión haciendo:
 
 ```
