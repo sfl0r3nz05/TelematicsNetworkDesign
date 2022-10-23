@@ -19,7 +19,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 1. Lanzar el contenedor:
 
     ```console
-     docker run -d -p 6633:6633 -p 8101:8101 -p 8181:8181 --name=opendaylight stephanfuhrmannionos/opendaylight:0.8.4
+     sudo docker run -d --name=opendaylight stephanfuhrmannionos/opendaylight:0.8.4
     ```
 
 2. Conectarse al contenedor:
@@ -51,7 +51,13 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      opendaylight-user@root> 
      ```
 
-3. Install Karaf features:
+3. Refresh Karaf features
+
+     ```console
+     feature:repo-refresh
+     ```
+
+4. Install Karaf features:
 
      - To install a feature, use the following command, where feature1 is the feature name listed in the table below:
 
@@ -76,23 +82,24 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      9. odl-restconf
      10. odl-openflowplugin-southbound
      11. odl-l2switch-all
+     12. odl-netconf-topology
 
           ```console
-          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf odl-openflowplugin-southbound odl-l2switch-all
+          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf odl-openflowplugin-southbound odl-l2switch-all odl-netconf-topology
           ```  
 
-4. Para verificar la lista de las features:
+5. Para verificar la lista de las features:
 
     ```console
     feature:list
     ```
 
-5. `OpenDaylight` exposed TCP ports in AWS inbound rules:
+6. `OpenDaylight` exposed TCP ports in AWS inbound rules:
    - `6633` Openflow,
    - `8101` Karaf CLI via SSH (see below),
    - `8181` RESTCONF / HTTP
 
-6. A través del navegador, y usando la IP pública de la instancia (e.g.: `http://35.174.155.88:8181/index.html#/login`) podremos ver la interfaz web del controller.
+8. A través del navegador, y usando la IP pública de la instancia (e.g.: `http://35.174.155.88:8181/index.html#/login`) podremos ver la interfaz web del controller.
 
     1. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
 
