@@ -56,7 +56,7 @@ La siguiente image muestra la red tipo a desplegar:
 
   <img src="./img/7.PNG"  width="60%" height="30%">
 
-1. Importar la siguiente appliance:
+1. Importar los appliance según la arquitectura anterior:
 
 Para R1 haremos
 
