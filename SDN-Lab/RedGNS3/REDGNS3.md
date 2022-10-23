@@ -16,7 +16,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 2. Después, en GNS3, vamos a *File*, *Import appliance*, se localiza el directorio donde se tiene la *imágen descargada* y *Abrir*.
 3. Seleccionar instalar el dispositivo en el servidor principal:
 
-    ![img](./img/1.PNG)
+    <img src="./img/1.PNG"  width="60%" height="30%">
 
 4. Seleccionar la imagen del router `cisco-3725`:
 
