@@ -1,5 +1,17 @@
 # GNS3 Network Deployment
 
+- [GNS3 Network Deployment](#gns3-network-deployment)
+  - [Pre-requisitos](#pre-requisitos)
+  - [Instalación de Dispositivos](#instalación-de-dispositivos)
+  - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
+- [OpenVswitch + Conexión controlador](#openvswitch--conexión-controlador)
+- [Expansión de red](#expansión-de-red)
+  - [Router](#router)
+  - [Host](#host)
+  - [Añadir protocolo OSPF](#añadir-protocolo-ospf)
+- [Introducción atacante](#introducción-atacante)
+  - [Preparación Sistema Operativo](#preparación-sistema-operativo)
+
 Esta sección establece los procedimientos para descargar y configurar la red GNS3.
 
 ## Pre-requisitos
@@ -38,28 +50,34 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
     <img src="./img/6.PNG"  width="60%" height="30%">
 
-En la pestaña que aparecerá dejar marcada la opción de "Install the appliance on the main server" y pulsar "Next". En la siguiente pestaña mostrará archivos necesarios para importar el appliance (si fueran necesarios). Descargar los archivos recomendados y finalizar. El dispositivo debería aparecer disponible en la barra izquierda junto a los demás.
+## Despliegue de la red Tipo
 
-Para empezar a "cacharrear" con ellos arrastrar la appliance al workspace. Es posible que se descarguen unos archivos adicionales. Incluidos en el proyecto empezaremos a configurarlos. Deberemos asignarle una ip asociada a una interfaz a cada una. 
+La siguiente image muestra la red tipo a desplegar:
+
+  <img src="./img/7.PNG"  width="60%" height="30%">
+
+1. Importar la siguiente appliance:
 
 Para R1 haremos
 
-```
+```console
 configure terminal
 interface eth0
 ip address 10.1.1.1 255.255.255.0
 no shutdown
 end
 ```
+
 Para R2
 
-```
+```console
 configure terminal
 interface eth0
 ip address 10.1.1.1 255.255.255.0
 no shutdown
 end
 ```
+
 Se guardara la configuración de los respectivos enrutadores introduciendo el comando
 
 ```
