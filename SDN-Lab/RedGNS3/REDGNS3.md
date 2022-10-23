@@ -223,7 +223,7 @@ Como se muestra en la siguiente figura se debe:
 8. Una vez conocida la IP de la interfaz de red, se procede a configurar OVS para tener acceso a internet, y, por consiguiente, a la instancia donde estará desplegado el controlador. Para conseguir esto se requieren dar dos pasos: asignarle una IP adecuada a la interfaz eth0 y abrir un gateway hacia la interfaz de red que dará acceso a internet
 
     ```console
-    ifconfig eth0  192.168.127.101
+    ifconfig eth0  192.168.122.101
     ip route add default via 192.168.122.1
     ```
 

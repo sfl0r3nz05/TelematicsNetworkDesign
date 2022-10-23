@@ -9,13 +9,13 @@ ovs-vsctl set bridge br0 protocols=OpenFlow13
 ovs-vsctl set bridge br0 other_config:enable-flush=true
 ```
 
-- Una vez establecidos estos parámetros se procede a conectar el OVS con el controlador. OpenDayLight ha de estar lanzado en el momento que se intente hacer la conexión.  La conexión se hará a través del puerto 6633.
+- Una vez establecidos estos parámetros se procede a conectar el OVS con el controlador. OpenDayLight ha de estar lanzado en el momento que se intente hacer la conexión. La conexión se hará a través del puerto 6633.
 
 ```console
-ovs-vsctl set-controller br0 tcp:ip_instancia:6633
+ovs-vsctl set-controller br0 tcp:54.152.14.26:6633
 ```
 
-- Los siguientes comandos son una colección de comandos útiles para comprobar si la conexión y configuración es correcta y/o comprobar las tablas de flujo establecidas por el controlador. 
+- Los siguientes comandos son una colección de comandos útiles para comprobar si la conexión y configuración es correcta y/o comprobar las tablas de flujo establecidas por el controlador.
 
 ```console
 ovs-vsctl list controller
