@@ -91,7 +91,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   wr run conf
   ```
 
-- Para R1_2
+- Para R3
 
   ```console
   configure terminal
@@ -139,7 +139,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   wr run conf
   ```
 
-- Para R2_2
+- Para R4
 
   ```console
   configure terminal
