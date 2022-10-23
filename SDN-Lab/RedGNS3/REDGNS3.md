@@ -4,7 +4,8 @@
   - [Pre-requisitos](#pre-requisitos)
   - [Instalación de Dispositivos](#instalación-de-dispositivos)
   - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
-- [OpenVswitch + Conexión controlador](#openvswitch--conexión-controlador)
+    - [Configuración de enrutadores](#configuración-de-enrutadores)
+    - [Configuración de OpenVswitch.](#configuración-de-openvswitch)
 - [Expansión de red](#expansión-de-red)
   - [Router](#router)
   - [Host](#host)
@@ -52,11 +53,11 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
 ## Despliegue de la red Tipo
 
-La siguiente image muestra la red tipo a desplegar:
+Se deben importar los appliance según la arquitectura siguiente, así como conectarlos entre si:
 
   <img src="./img/7.png"  width="60%" height="30%">
 
-1. Importar los appliance según la arquitectura anterior:
+### Configuración de enrutadores
 
 - Para R1:
 
@@ -154,9 +155,7 @@ La siguiente image muestra la red tipo a desplegar:
   wr run conf
   ```
 
-2. Ahora se podrían probar conectandolos entre ellos y probar la correcta configuración haciendo un ping entre ellos.
-
-# OpenVswitch + Conexión controlador
+### Configuración de OpenVswitch.
 
 Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed. 
 
