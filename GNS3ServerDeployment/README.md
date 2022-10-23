@@ -3,6 +3,7 @@
 - [GNS3 server configuration on an EC2 instance](#gns3-server-configuration-on-an-ec2-instance)
   - [Deploy GNS3 Server](#deploy-gns3-server)
   - [Connect to GNS3 Server from GNS3 client](#connect-to-gns3-server-from-gns3-client)
+  - [How to bypass a network of restrictions by tunneling](#how-to-bypass-a-network-of-restrictions-by-tunneling)
   - [To Do](#to-do)
 
 The purpose of this repository is to deploy a GNS3 server on an EC2 instance of AWS. The following figure shows the basic architecture of the deployment to be implemented:
@@ -107,6 +108,20 @@ To perform the right deployment follow each of the following steps:
 
 <img src="img/output.png" alt="drawing" width="300"/>
 
+## How to bypass a network of restrictions by tunneling
+
+If we are under a restrictive network with firewalls blocking the network, the following tunneling is proposed to bypass it.
+
+```console
+ssh -N -i .\openstack.pem -L localhost:3080:172.31.88.200:3080 ubuntu@54.89.220.232
+```
+
+>**Note:** *For this mechanism to work, at least the access through port 22 must be open.*
+
+- The following figure shows how the client must be configured so that the traffic is redirected through the tunnel:
+
+    <img src="./img/bypassing_firewall.png"  width="60%" height="30%">
+
 ## To Do
 
 1. Enable secure connection between the client and server via TLS
@@ -114,6 +129,3 @@ To perform the right deployment follow each of the following steps:
 3. Document how to add a new router using binary files
 4. Documenting how to bypass a network of restrictions by tunneling
 
-```console
- ssh -N -i .\openstack.pem -L 10.62.50.58:3080:172.31.88.200:3080 ubuntu@54.89.220.232
-```
