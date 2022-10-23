@@ -58,32 +58,103 @@ La siguiente image muestra la red tipo a desplegar:
 
 1. Importar los appliance según la arquitectura anterior:
 
-Para R1 haremos
+- Para R1:
 
-```console
-configure terminal
-interface eth0
-ip address 10.1.1.1 255.255.255.0
-no shutdown
-end
-```
+  ```console
+  configure terminal
+  interface f0/0
+  ip address 10.1.1.1 255.255.255.0
+  no shutdown
+  end
+  ```
 
-Para R2
+  ```console
+  configure terminal
+  interface f0/1
+  ip address 10.1.2.1 255.255.255.0
+  no shutdown
+  end
+  ```
 
-```console
-configure terminal
-interface eth0
-ip address 10.1.1.1 255.255.255.0
-no shutdown
-end
-```
+  - Se guardara la configuración del enrutador R1 introduciendo el comando:
 
-Se guardara la configuración de los respectivos enrutadores introduciendo el comando
+  ```console
+  wr run conf
+  ```
 
-```
-wr run conf
-```
-Ahora se podrían probar conectandolos entre ellos y probar la correcta configuración haciendo un ping entre ellos.
+- Para R1_2
+
+  ```console
+  configure terminal
+  interface f0/0
+  ip address 10.1.2.2 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  ```console
+  configure terminal
+  interface f0/1
+  ip address 10.1.4.1 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  - Se guardara la configuración del enrutador R1_1 introduciendo el comando:
+
+  ```console
+  wr run conf
+  ```
+
+- Para R2
+
+  ```console
+  configure terminal
+  interface f0/0
+  ip address 10.1.1.2 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  ```console
+  configure terminal
+  interface f0/1
+  ip address 10.1.3.1 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  - Se guardara la configuración del enrutador R2 introduciendo el comando:
+
+  ```console
+  wr run conf
+  ```
+
+- Para R2_2
+
+  ```console
+  configure terminal
+  interface f0/0
+  ip address 10.1.3.2 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  ```console
+  configure terminal
+  interface f0/1
+  ip address 10.1.5.1 255.255.255.0
+  no shutdown
+  end
+  ```
+
+  - Se guardara la configuración del enrutador R2_2 introduciendo el comando:
+
+  ```console
+  wr run conf
+  ```
+
+2. Ahora se podrían probar conectandolos entre ellos y probar la correcta configuración haciendo un ping entre ellos.
 
 # OpenVswitch + Conexión controlador
 
