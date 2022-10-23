@@ -20,9 +20,9 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 - Tener la instancia `t2.large` (*GNS3-Server*) desplegada
 - Conexión a dicha instancia vía `ssh`.
 - Conexión vía GNS3 client a esa instancia.
-  - Implica tener abierto el puerto 3080 (Detalle comentado en la instalación de GNS3).
+  - Implica tener abierto el puerto 3080 (Detalle comentado en la [instalación de GNS3](../../GNS3ServerDeployment/README.md#deploy-gns3-server)).
 - Conexión vía Telnet a esa instancia.
-  - Implica tener abierto el rango de puertos 5000 - 50010 (Detalle comentado en la instalación de GNS3).
+  - Implica tener abierto el rango de puertos 5000 - 50010 (Detalle comentado en la [instalación de GNS3](../../GNS3ServerDeployment/README.md#deploy-gns3-server)).
 
 ## Instalación de Dispositivos
 
