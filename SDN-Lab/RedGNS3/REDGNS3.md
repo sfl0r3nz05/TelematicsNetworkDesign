@@ -4,7 +4,8 @@
   - [Pre-requisitos](#pre-requisitos)
   - [Instalación de Dispositivos](#instalación-de-dispositivos)
   - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
-    - [Configuración de enrutadores](#configuración-de-enrutadores)
+    - [Configuración de interfaces en enrutadores](#configuración-de-interfaces-en-enrutadores)
+    - [Configuración de OSPF en los enrutadores](#configuración-de-ospf-en-los-enrutadores)
     - [Configuración de OpenVswitch](#configuración-de-openvswitch)
 - [Expansión de red](#expansión-de-red)
   - [Router](#router)
@@ -65,7 +66,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
   <img src="./img/8.PNG"  width="60%" height="30%">
 
-### Configuración de enrutadores
+### Configuración de interfaces en enrutadores
 
 - Para R1:
 
@@ -158,6 +159,24 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   ```
 
   - Se guardara la configuración del enrutador R2_2 introduciendo el comando:
+
+  ```console
+  copy running-config startup-config
+  ```
+
+### Configuración de OSPF en los enrutadores
+
+- Para hacer que los routers operen bajo el protocolo habrá que configurarlos de la siguiente manera (todos igual).
+
+  ```console
+  configure terminal
+  router ospf 1
+  network 10.0.0.0 0.255.255.255 area 0
+  default-information originate
+  end
+  ```
+
+- Se guardara la configuración del enrutador R2_2 introduciendo el comando:
 
   ```console
   copy running-config startup-config
