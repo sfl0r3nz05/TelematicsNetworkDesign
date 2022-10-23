@@ -72,20 +72,23 @@ Esta sección establece los procedimientos para descargar y configurar el contro
           ```
 
      1. odl-l2switch-switch
-     2. odl-dlux-core
-     3. odl-dluxapps-yangutils
-     4. features-dlux
-     5. odl-dluxapps-applications
-     6. odl-dluxapps-yangvisualizer
-     7. odl-dluxapps-topology
-     8. odl-dluxapps-nodes
-     9. odl-restconf
-     10. odl-openflowplugin-southbound
-     11. odl-l2switch-all
-     12. odl-netconf-topology
+     2. odl-l2switch-all
+     3. odl-dlux-core
+     4. odl-dluxapps-yangutils
+     5. features-dlux
+     6. odl-dluxapps-applications
+     7. odl-dluxapps-yangvisualizer
+     8. odl-dluxapps-topology
+     9. odl-dluxapps-nodes
+     10. odl-restconf-all
+     11. odl-netconf-topology
+     13. odl-yanglib
+     14. odl-mdsal-all
+     15. odl-openflowplugin-all
+     16. odl-openflowplugin-southbound
 
           ```console
-          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf odl-openflowplugin-southbound odl-l2switch-all odl-netconf-topology
+          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf-all odl-openflowplugin-southbound odl-l2switch-all odl-netconf-topology odl-yanglib odl-mdsal-all odl-openflowplugin-all
           ```  
 
 5. Para verificar la lista de las features:
@@ -99,7 +102,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
    - `8101` Karaf CLI via SSH (see below),
    - `8181` RESTCONF / HTTP
 
-8. A través del navegador, y usando la IP pública de la instancia (e.g.: `http://35.174.155.88:8181/index.html#/login`) podremos ver la interfaz web del controller.
+7. A través del navegador, y usando la IP pública de la instancia (e.g.: `http://35.174.155.88:8181/index.html#/login`) podremos ver la interfaz web del controller.
 
     1. Pero, en primer lugar, hay que introducir las credenciales que por defecto son:
 
