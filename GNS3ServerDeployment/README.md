@@ -15,7 +15,7 @@ To perform the right deployment follow each of the following steps:
 
 1. We assume that we have an EC2 instance deployed with Ubuntu Server 20.04 as OS:
 
-    ![](img/ec2.png)
+    ![img](img/ec2.png)
 
 2. The following rules apply for opening incoming connections from:
 
@@ -27,9 +27,9 @@ To perform the right deployment follow each of the following steps:
 
     - Example of applied rules
 
-    ![](img/ports.png)
+    ![img](img/ports.png)
 
-1. GNS3 server installation:
+3. GNS3 server installation:
 
     ```console
     sudo apt update
@@ -41,10 +41,9 @@ To perform the right deployment follow each of the following steps:
 
     | Users able to run GNS3| Users able to capture packages |
     |-------------|-----------|
-    | ![](img/install-gns3-ubuntu-01.png) | ![](img/install-gns3-ubuntu-02.png) |
+    | ![img](img/install-gns3-ubuntu-01.png) | ![img](img/install-gns3-ubuntu-02.png) |
 
-
-2. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
+4. IOU (IOS over Unix) is an internal Cisco tool for simulating the ASICs in Cisco Switches. This enables you to play with Layer 2 switching in the Labs:
 
     ```console
     sudo dpkg --add-architecture i386
@@ -52,19 +51,7 @@ To perform the right deployment follow each of the following steps:
     sudo apt install gns3-iou
     ```
 
-3. Install docker on ubuntu:
-
--  Step 1: Update System
-
-    ```console
-    sudo apt -y update
-    ```
-- Step 2: Install basic dependencies
-    ```console
-    sudo apt -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    ```
-
-- Step 3: [Install Docker CE on Ubuntu 22.04|20.04|18.04](https://docs.docker.com/engine/install/ubuntu/).
+5. [Install Docker CE on Ubuntu 22.04|20.04|18.04](https://docs.docker.com/engine/install/ubuntu/).
 
   - Add your user account to docker group.
 
@@ -87,7 +74,7 @@ To perform the right deployment follow each of the following steps:
     done
     ```
 
-1. Run GNS3 server:
+6. Run GNS3 server:
 
     ```console
     gns3server
