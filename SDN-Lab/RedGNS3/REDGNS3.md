@@ -193,6 +193,15 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   Success rate is 100 percent (5/5), round-trip min/avg/max = 24/30/36 ms
   ```
 
+- Se podría comprobar la existencia de vecinos:
+
+  ```console
+  R1#show ip ospf neighbor
+
+  Neighbor ID     Pri   State           Dead Time   Address         Interface
+  10.1.3.1          1   FULL/DR         00:00:30    10.1.1.2        FastEthernet0/0
+  10.1.4.1          1   FULL/DR         00:00:31    10.1.2.2        FastEthernet0/1
+  ```
 
 ### Configuración de OpenVswitch
 
