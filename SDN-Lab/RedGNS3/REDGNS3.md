@@ -7,6 +7,7 @@
     - [Configuración de interfaces en enrutadores](#configuración-de-interfaces-en-enrutadores)
     - [Configuración de OSPF en los enrutadores](#configuración-de-ospf-en-los-enrutadores)
     - [Acceso de OpenVSwitch a internet](#acceso-de-openvswitch-a-internet)
+    - [Conexión de OpenVSwitch al controlador](#conexión-de-openvswitch-al-controlador)
 - [Expansión de red](#expansión-de-red)
   - [Router](#router)
   - [Host](#host)
@@ -245,38 +246,24 @@ Como se muestra en la siguiente figura se debe:
 
 > **Note:**: *Fuera del scope de este ejercicio queda habilitar la salida a internet desde los enrutadores.*
 
-Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed.
+### Conexión de OpenVSwitch al controlador
 
-Después, se añade al proyecto y se le tiene que dar acceso a internet para que pueda hacerse la conexión con el controlador.
-Para conectar el OVS a internet hay que añadir una cloud al proyecto. Es importante acceder a la configuración de la cloud y añadirle en las conexiones la interfaz de red virbr0. A continuación, se debe conectar la interfaz del switch eth0 con la nube mediante la mencionada virbr0. Se puede revisar en el terminal la IP correspondiente a esta interfaz de red.
+- Antes de realizar la conexión con el controlador, es recomendable fijar algunos parámetros de la configuración para el controlador del OVS. En este caso ha sido necesario fijar el protocolo y habilitar el flujo en br0.
 
-
-
-Se comprobará la conexión haciendo:
-
-```
-ping 8.8.8.8
-ping (ip de la instancia del controlador)
-```
-
-Antes de realizar la conexión con el controlador, es recomendable fijar algunos parámetros de la configuración para el controlador del OVS. En este caso ha sido necesario fijar el protocolo y habilitar el flujo en br0.
-
-```
+```console
 ovs-vsctl set bridge br0 protocols=OpenFlow13
 ovs-vsctl set bridge br0 other_config:enable-flush=true
 ```
 
-Una vez establecidos estos parámetros se procede a conectar el OVS con el controlador. OpenDayLight ha de estar lanzado en el momento que se intente hacer la conexión.  La conexión se hará con el puerto 6633 o el 6653, los puertos definidos para OpenFlow.
+- Una vez establecidos estos parámetros se procede a conectar el OVS con el controlador. OpenDayLight ha de estar lanzado en el momento que se intente hacer la conexión.  La conexión se hará a través del puerto 6633.
 
-```
+```console
 ovs-vsctl set-controller br0 tcp:ip_instancia:6633
 ```
 
-Ahora si conectamos R1 a la interfaz eth1 del switch y R2 a la eth2, si está correctamente configurado podremos hacer ping de uno a otro. Además, es recomendable ver las tablas de flujo que se han establecido e ir entendiendo el funcionamento del sistema.
+- Los siguientes comandos son una colección de comandos útiles para comprobar si la conexión y configuración es correcta y/o comprobar las tablas de flujo establecidas por el controlador. 
 
-Los siguientes comandos son una colección de comandos útiles para comprobar si la conexión y configuración es correcta y/o comprobar las tablas de flujo establecidas por el controlador. 
-
-```
+```console
 ovs-vsctl list controller
 ovs-vsctl list bridge br0
 ovs-ofctl -O OpenFlow13 dump-flows br0
