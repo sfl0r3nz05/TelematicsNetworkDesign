@@ -2,16 +2,26 @@
 
 Esta sección establece los procedimientos para descargar y configurar la red GNS3.
 
-## Prerequisito
+## Pre-requisitos
 
-
+- Tener la instancia `t2.large` (*GNS3-Server*) desplegada
+- Conexión a dicha instancia vía `ssh`.
+- Conexión vía GNS3 client a esa instancia.
 
 ## Instalación de Dispositivos
 
 - La carpeta `ApplianceImageGNS3` contiene todas las imágenes que serán importadas de la siguiente manera, usando la de `cisco-3725` como muestra:
 
 1. Se descarga la imagen correspondiente al router (cisco-3725) ubicada en `~/TelematicsNetworkDesign/SDN-Lab/ApplianceImageGNS3`.
-2. Después, en GNS3, vamos a "File" e "Import appliance" ir al directorio donde se tiene la imágen recientemente descargada y "Abrir".
+2. Después, en GNS3, vamos a *File*, *Import appliance*, se localiza el directorio donde se tiene la *imágen descargada* y *Abrir*.
+3. Seleccionar instalar el dispositivo en el servidor principal:
+
+    ![img](./img/1.PNG)
+    ![img](./img/2.PNG)
+    ![img](./img/3.PNG)
+    ![img](./img/4.PNG)
+    ![img](./img/5.PNG)
+    ![img](./img/6.PNG)
 
 En la pestaña que aparecerá dejar marcada la opción de "Install the appliance on the main server" y pulsar "Next". En la siguiente pestaña mostrará archivos necesarios para importar el appliance (si fueran necesarios). Descargar los archivos recomendados y finalizar. El dispositivo debería aparecer disponible en la barra izquierda junto a los demás.
 
