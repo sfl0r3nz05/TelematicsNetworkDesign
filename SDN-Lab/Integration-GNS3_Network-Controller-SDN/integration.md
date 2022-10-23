@@ -4,7 +4,7 @@
 
 - Si se observa la topología de la red, se pueden observar los puertos `telnet` asignados, de manera que a través de la ejecusión del comando `telnet 52.91.245.31 5004` permitirá realizar las siguientes configuraciones en el *OpenVSwitch*.
 
-    <img src="./img/1.png"  width="60%" height="30%">
+    <img src="./img/1.png"  width="30%" height="15%">
 
 - Antes de realizar la conexión con el controlador, es recomendable fijar algunos parámetros de la configuración para el controlador del OVS. En este caso ha sido necesario fijar el protocolo y habilitar el flujo en br0.
 
