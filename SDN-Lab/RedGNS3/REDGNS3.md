@@ -1,14 +1,17 @@
 # GNS3 Network Deployment
 
-Ahora pasaremos a desplegar nuestra red poco a poco. Lanzada la instancia1, abriremos el programa GNS3 y lo conectaremos con el servidor como ya se ha explicado. Iremos introduciendo los diferentes elementos que conformarán la red y aplicando las configuraciones pertinentes. Una vez completado el paso OpenVswitch + Conexión podremos decir que tenemos una red SDN. A partir de ahí, iremos introduciendo complejidad a la red y orientándolo hacia nuestro objetivo de desarrollar un ataque en ella.
+Esta sección establece los procedimientos para descargar y configurar la red GNS3.
 
-## Familiarización
+## Prerequisito
 
-Antes de empezar con partes de mayor complejidad será recomendable familiarizarnos con el entorno de GNS3. Nada más creado el proyecto podemos empezar a insertar objetos. 
 
-En los iconos de la parte izquierda de la pantalla podremos ver todos los dispositivos que se ofrecen por defecto. Para empezar, introduciremos dos routers. Es posible que haya alguno por defecto disponible, pero en modo de ilustración, veremos como importar una imágen de un dispositivo al programa. Será útil para proceder igual con otro tipo de dispositivos cuando sean necesarios.
 
-En la carpeta del repositorio imágenes nos descargaremos el correspondiente al router (cisco-3725). Después, en GNS3, vamos a "File" e "Import appliance" ir al directorio donde se tiene la imágen recientemente descargada y "Abrir".
+## Instalación de Dispositivos
+
+- La carpeta `ApplianceImageGNS3` contiene todas las imágenes que serán importadas de la siguiente manera, usando la de `cisco-3725` como muestra:
+
+1. Se descarga la imagen correspondiente al router (cisco-3725) ubicada en `~/TelematicsNetworkDesign/SDN-Lab/ApplianceImageGNS3`.
+2. Después, en GNS3, vamos a "File" e "Import appliance" ir al directorio donde se tiene la imágen recientemente descargada y "Abrir".
 
 En la pestaña que aparecerá dejar marcada la opción de "Install the appliance on the main server" y pulsar "Next". En la siguiente pestaña mostrará archivos necesarios para importar el appliance (si fueran necesarios). Descargar los archivos recomendados y finalizar. El dispositivo debería aparecer disponible en la barra izquierda junto a los demás.
 
@@ -217,3 +220,4 @@ apk add --upgrade libpcap-dev
 
 
 
+1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
