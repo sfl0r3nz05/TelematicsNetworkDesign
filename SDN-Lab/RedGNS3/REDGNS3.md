@@ -20,20 +20,23 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
 4. Seleccionar la imagen del router `cisco-3725`:
 
-    ![img](./img/2.PNG)
+    <img src="./img/2.PNG"  width="60%" height="30%">
 
 5. Aceptar la instalación de la imagen del router `cisco-3725`:
 
-    ![img](./img/3.PNG)
+    <img src="./img/3.PNG"  width="60%" height="30%">
 
 6. Terminar el proceso de instalación de la imagen del router `cisco-3725`:
-    ![img](./img/4.PNG)
+
+    <img src="./img/4.PNG"  width="60%" height="30%">
 
 7. Recibir mensaje de imagen del router `cisco-3725` instalada:
-    ![img](./img/5.PNG)
+
+    <img src="./img/5.PNG"  width="60%" height="30%">
 
 8. Verificar que la imagen del router `cisco-3725` ha sido instalada
-    ![img](./img/6.PNG)
+
+    <img src="./img/6.PNG"  width="60%" height="30%">
 
 En la pestaña que aparecerá dejar marcada la opción de "Install the appliance on the main server" y pulsar "Next". En la siguiente pestaña mostrará archivos necesarios para importar el appliance (si fueran necesarios). Descargar los archivos recomendados y finalizar. El dispositivo debería aparecer disponible en la barra izquierda junto a los demás.
 
