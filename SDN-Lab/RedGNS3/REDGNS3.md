@@ -88,7 +88,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   - Se guardara la configuración del enrutador R1 introduciendo el comando:
 
   ```console
-  wr run conf
+  copy running-config startup-config
   ```
 
 - Para R3
@@ -112,7 +112,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   - Se guardara la configuración del enrutador R1_1 introduciendo el comando:
 
   ```console
-  wr run conf
+  copy running-config startup-config
   ```
 
 - Para R2
@@ -136,7 +136,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   - Se guardara la configuración del enrutador R2 introduciendo el comando:
 
   ```console
-  wr run conf
+  copy running-config startup-config
   ```
 
 - Para R4
@@ -160,7 +160,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   - Se guardara la configuración del enrutador R2_2 introduciendo el comando:
 
   ```console
-  wr run conf
+  copy running-config startup-config
   ```
 
 ### Configuración de OpenVswitch
