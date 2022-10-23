@@ -182,6 +182,18 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
   copy running-config startup-config
   ```
 
+- Debería existir comunicación entre routers, por ejemplo de R1 a R4:
+
+  ```console
+  R1#ping 10.1.5.1
+
+  Type escape sequence to abort.
+  Sending 5, 100-byte ICMP Echos to 10.1.5.1, timeout is 2 seconds:
+  !!!!!
+  Success rate is 100 percent (5/5), round-trip min/avg/max = 24/30/36 ms
+  ```
+
+
 ### Configuración de OpenVswitch
 
 Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed.
