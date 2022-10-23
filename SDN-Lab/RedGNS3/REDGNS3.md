@@ -5,7 +5,7 @@
   - [Instalación de Dispositivos](#instalación-de-dispositivos)
   - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
     - [Configuración de enrutadores](#configuración-de-enrutadores)
-    - [Configuración de OpenVswitch.](#configuración-de-openvswitch)
+    - [Configuración de OpenVswitch](#configuración-de-openvswitch)
 - [Expansión de red](#expansión-de-red)
   - [Router](#router)
   - [Host](#host)
@@ -20,6 +20,9 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 - Tener la instancia `t2.large` (*GNS3-Server*) desplegada
 - Conexión a dicha instancia vía `ssh`.
 - Conexión vía GNS3 client a esa instancia.
+  - Implica tener abierto el puerto 3080 (Detalle comentado en la instalación de GNS3).
+- Conexión vía Telnet a esa instancia.
+  - Implica tener abierto el rango de puertos 5000 - 50010 (Detalle comentado en la instalación de GNS3).
 
 ## Instalación de Dispositivos
 
@@ -53,9 +56,14 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
 ## Despliegue de la red Tipo
 
-Se deben importar los appliance según la arquitectura siguiente, así como conectarlos entre si:
+1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
+2. Se deben importar los appliance según la arquitectura siguiente, así como conectarlos entre si:
 
   <img src="./img/7.png"  width="60%" height="30%">
+
+> Note: Por defecto al importar el *appliance* Open vSwitch aparece con un ícono que debe ser cambiado
+
+  <img src="./img/8.PNG"  width="60%" height="30%">
 
 ### Configuración de enrutadores
 
@@ -155,9 +163,9 @@ Se deben importar los appliance según la arquitectura siguiente, así como cone
   wr run conf
   ```
 
-### Configuración de OpenVswitch.
+### Configuración de OpenVswitch
 
-Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed. 
+Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed.
 
 Después, se añade al proyecto y se le tiene que dar acceso a internet para que pueda hacerse la conexión con el controlador.
 Para conectar el OVS a internet hay que añadir una cloud al proyecto. Es importante acceder a la configuración de la cloud y añadirle en las conexiones la interfaz de red virbr0. A continuación, se debe conectar la interfaz del switch eth0 con la nube mediante la mencionada virbr0. Se puede revisar en el terminal la IP correspondiente a esta interfaz de red.
@@ -333,4 +341,3 @@ apk add --upgrade libpcap-dev
 
 
 
-1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.

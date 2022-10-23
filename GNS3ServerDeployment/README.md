@@ -64,44 +64,22 @@ To perform the right deployment follow each of the following steps:
     sudo apt -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
     ```
 
-- Step 3: Install Docker CE on Ubuntu 22.04|20.04|18.04
-    - If you have older versions of Docker, remove it and its dependent packages.
+- Step 3: [Install Docker CE on Ubuntu 22.04|20.04|18.04](https://docs.docker.com/engine/install/ubuntu/).
 
-    ```console
-    sudo apt remove docker docker-engine docker.io containerd runc
-    ```
-    - Import Docker repository GPG key:
-
-    ```console
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
-    ```
-    - You can then add Docker CE repository to Ubuntu
-
-    ```console
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-    ```
-    
-    - Finally install Docker CE on Ubuntu22.04|20.04|18.04:
-
-    ```console
-    sudo apt update
-    sudo apt install docker-ce docker-ce-cli containerd.io
-    ```
-
-    - Add your user account to docker group.
+  - Add your user account to docker group.
 
     ```console
     sudo usermod -aG docker $USER
     newgrp docker
     ```
-    
-    - Verify installation by checking Docker version:
+
+  - Verify installation by checking Docker version:
 
     ```console
     docker version
     ```
 
-    - After installing Docker and IOU, add your user to the following groups:
+  - After installing Docker and IOU, add your user to the following groups:
 
     ```console
     for i in ubridge libvirt kvm wireshark docker; do
@@ -109,35 +87,36 @@ To perform the right deployment follow each of the following steps:
     done
     ```
 
-6. Run GNS3 server:
+1. Run GNS3 server:
 
     ```console
     gns3server
     ```
-- It is now possible to access the GNS3 service:
+
+   - It is now possible to access the GNS3 service:
 
     ```console
     http://aws_instance_ip:3080
     ```
 
-- Verify the service:
+   - Verify the service:
 
-<img src="img/front.png" alt="drawing" width="700"/>
+    <img src="img/front.png" alt="drawing" width="700"/>
 
 ## Connect to GNS3 Server from GNS3 client
 
-7. Now, it is time to connect to the server via the GNS3 client and configure the preferences properly.
+1. Now, it is time to connect to the server via the GNS3 client and configure the preferences properly.
 
-<img src="img/server_preferences.png" alt="drawing" width="700"/>
+    <img src="img/server_preferences.png" alt="drawing" width="700"/>
 
-- Default username/password:
+   - Default username/password:
 
     ```console
     username: gns3
     password: gns3
     ```
 
-8. Verify that the server has connected properly.
+2. Verify that the server has connected properly.
 
 <img src="img/output.png" alt="drawing" width="300"/>
 
