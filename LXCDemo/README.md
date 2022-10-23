@@ -274,7 +274,7 @@ Now lets create a container in the new project:
 lxc launch ubuntu:18.04 webserver --project client2-website
 ```
 
-***Note**:* *We are using the --project flag on the lxc launch command to save switching into the new project.*
+> **Note:**: *We are using the --project flag on the lxc launch command to save switching into the new project.*
 
 Oops! Something went wrong though, you will get this output:
 
@@ -352,7 +352,7 @@ Next we add an `eth0` nic device to the default profile:
 lxc profile device add default eth0 nic name=eth0 nictype=p2p --project client2-website
 ```
 
-***Note:*** *We have changed the networking config for this nic device to be p2p rather than bridge to demonstrate the ability to have different default profiles in separate projects.*
+> **Note:**: *We have changed the networking config for this nic device to be p2p rather than bridge to demonstrate the ability to have different default profiles in separate projects.*
 
 ### Create the containers
 

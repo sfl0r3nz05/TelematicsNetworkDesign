@@ -62,7 +62,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
   <img src="./img/7.png"  width="60%" height="30%">
 
-> Note: Por defecto al importar el *appliance* Open vSwitch aparece con un ícono que debe ser cambiado
+> **Note:**: *Por defecto al importar el *appliance* Open vSwitch aparece con un ícono que debe ser cambiado.*
 
   <img src="./img/8.PNG"  width="60%" height="30%">
 
@@ -228,10 +228,22 @@ Como se muestra en la siguiente figura se debe:
 
 8. Una vez conocida la IP de la interfaz de red, se procede a configurar OVS para tener acceso a internet, y, por consiguiente, a la instancia donde estará desplegado el controlador. Para conseguir esto se requieren dar dos pasos: asignarle una IP adecuada a la interfaz eth0 y abrir un gateway hacia la interfaz de red que dará acceso a internet
 
-```console
-ifconfig eth0  192.168.127.101
-ip route add default via 192.168.122.1
-```
+    ```console
+    ifconfig eth0  192.168.127.101
+    ip route add default via 192.168.122.1
+    ```
+
+9. Se verifica la conexión enviando paquetes ICMP desde el controlador hacia internet
+
+    ```console
+    ping 8.8.8.8
+    ```
+
+> **Note**: *Es posible que sea necesario generar una regla de entrada en la instancia EC2 para habilitar el acceso vía ICMP.*
+
+  <img src="./img/9.PNG"  width="60%" height="30%">
+
+> **Note:**: *Fuera del scope de este ejercicio queda habilitar la salida a internet desde los enrutadores.*
 
 Ahora que tenemos los routers configurados tratamos de conectarlos via OpenVSwitch. Para obtener el dispositivo, seguimos los pasos del caso de los routers con la imagen de la carpeta de nombre openvswitch-management-fixed.
 

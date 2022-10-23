@@ -319,7 +319,7 @@ In this step you will use the `--pids-limit` flag to limit the number of process
    [1]+   Done                : | :
    ```
 
-  > **Note:** The command above is `:(){ :|: & };:`.
+  > **Note:** *The command above is `:(){ :|: & };:`.*
 
   You will need to press `Ctrl-C` to stop the process.
 
