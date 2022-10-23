@@ -54,7 +54,7 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 
 La siguiente image muestra la red tipo a desplegar:
 
-  <img src="./img/7.PNG"  width="60%" height="30%">
+  <img src="./img/7.png"  width="60%" height="30%">
 
 1. Importar los appliance según la arquitectura anterior:
 
