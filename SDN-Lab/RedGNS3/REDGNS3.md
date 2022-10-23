@@ -7,7 +7,7 @@
     - [Configuración de interfaces en enrutadores](#configuración-de-interfaces-en-enrutadores)
     - [Configuración de OSPF en los enrutadores](#configuración-de-ospf-en-los-enrutadores)
     - [Acceso de OpenVSwitch a internet](#acceso-de-openvswitch-a-internet)
-    - [Host](#host)
+    - [Incluir Hosts](#incluir-hosts)
 
 Esta sección establece los procedimientos para descargar y configurar la red GNS3.
 
@@ -240,8 +240,7 @@ Como se muestra en la siguiente figura se debe:
 
 > **Note:**: *Fuera del scope de este ejercicio queda habilitar la salida a internet desde los enrutadores.*
 
-
-### Host
+### Incluir Hosts
 
 El VPSC, disponible por defecto en GNS3, es el hosts que conectaremos al extremo de la red. La configuración a aplicar en este caso es simplemente agregar las IPs en las interfaces que se conectan. 
 
