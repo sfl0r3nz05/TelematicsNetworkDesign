@@ -241,7 +241,7 @@ Como se muestra en la siguiente figura se debe:
 
 > **Note**: *Es posible que sea necesario generar una regla de entrada en la instancia EC2 para habilitar el acceso vía ICMP.*
 
-  <img src="./img/10.PNG"  width="60%" height="30%">
+  <img src="./img/10.PNG">
 
 > **Note:**: *Fuera del scope de este ejercicio queda habilitar la salida a internet desde los enrutadores.*
 
