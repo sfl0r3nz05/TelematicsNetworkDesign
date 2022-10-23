@@ -73,9 +73,12 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      6. odl-dluxapps-yangvisualizer
      7. odl-dluxapps-topology
      8. odl-dluxapps-nodes
+     9. odl-restconf
+     10. odl-openflowplugin-southbound
+     11. odl-l2switch-all
 
           ```console
-          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes
+          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf odl-openflowplugin-southbound odl-l2switch-all
           ```  
 
 4. Para verificar la lista de las features:
