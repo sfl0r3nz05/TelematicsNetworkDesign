@@ -19,7 +19,7 @@ Esta sección establece los procedimientos para descargar y configurar el contro
 1. Lanzar el contenedor:
 
     ```console
-     sudo docker run -d --name=opendaylight stephanfuhrmannionos/opendaylight:0.8.4
+     docker run -d --network host --name=opendaylight stephanfuhrmannionos/opendaylight:0.8.4
     ```
 
 2. Conectarse al contenedor:
