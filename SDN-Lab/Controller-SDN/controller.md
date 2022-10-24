@@ -31,7 +31,6 @@ Esta sección establece los procedimientos para descargar y configurar el contro
    - Output:
   
      ```console
-     ubuntu@ip-172-31-95-13:~/karaf-0.8.4$ ./bin/karaf
      Apache Karaf starting up. Press Enter to open the shell now...
      100% [========================================================================]
      Karaf started in 3s. Bundle stats: 54 active, 55 total
@@ -84,11 +83,10 @@ Esta sección establece los procedimientos para descargar y configurar el contro
      11. odl-netconf-topology
      13. odl-yanglib
      14. odl-mdsal-all
-     15. odl-openflowplugin-all
-     16. odl-openflowplugin-southbound
+     15. odl-openflowplugin-southbound
 
           ```console
-          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf-all odl-openflowplugin-southbound odl-l2switch-all odl-netconf-topology odl-yanglib odl-mdsal-all odl-openflowplugin-all
+          feature:install odl-l2switch-switch odl-dlux-core odl-dluxapps-yangutils features-dlux odl-dluxapps-applications odl-dluxapps-yangvisualizer odl-dluxapps-topology odl-dluxapps-nodes odl-restconf-all odl-openflowplugin-southbound odl-l2switch-all odl-netconf-topology odl-yanglib odl-mdsal-all
           ```  
 
 5. Para verificar la lista de las features:
