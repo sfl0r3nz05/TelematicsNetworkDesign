@@ -6,12 +6,6 @@
 
     <img src="./img/1.png"  width="30%" height="15%">
 
-- Antes de realizar la conexión con el controlador, es recomendable fijar algunos parámetros de la configuración para el controlador del OVS. En este caso ha sido necesario fijar el protocolo y habilitar el flujo en br0.
-
-```console
-ovs-vsctl set bridge br0 other_config:enable-flush=true
-```
-
 - Una vez establecidos estos parámetros se procede a conectar el OVS con el controlador. OpenDayLight ha de estar lanzado en el momento que se intente hacer la conexión. La conexión se hará a través del puerto 6633.
 
 ```console
