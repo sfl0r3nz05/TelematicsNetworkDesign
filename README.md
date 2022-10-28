@@ -1,6 +1,6 @@
 # Telematics Network Design
 
-> **Note:** This repo and the information provided is under development ⛏ 
+> **Note:** This repo and the information provided is under construction, so the structure is subject to change. 👀 
 
 - [Telematics Network Design](#telematics-network-design)
   - [Prerequisites](#prerequisites)
