@@ -4,7 +4,10 @@
   - [Practice objectives](#practice-objectives)
   - [Network Scenario](#network-scenario)
   - [Import Appliances](#import-appliances)
-  - [Configure HTTP AND HTTPS Server](#configure-http-and-https-server)
+  - [Configure HTTP AND HTTPS Server on the Router](#configure-http-and-https-server-on-the-router)
+    - [Verify vty from Kali Linux VM](#verify-vty-from-kali-linux-vm)
+  - [Security Tests](#security-tests)
+  - [Access Router page through HTTPS from Kali Linux VM](#access-router-page-through-https-from-kali-linux-vm)
 
 ## Practice objectives
 
@@ -31,7 +34,7 @@ This is a very simple network scenario which consists of one cisco router 7200 s
 - Import [Kali Linux Appliance](./appliances/kali-linux.gns3a)
 - Import [Cisco 7200 Router](./appliances/cisco-7200.gns3a)
 
-## Configure HTTP AND HTTPS Server
+## Configure HTTP AND HTTPS Server on the Router
 
 - Configure HOSTNAME 
 
@@ -75,7 +78,7 @@ router1(config)#
 - Configure DHCP POOL 
 
 ```console
-router1(config)#ip dhcp pool networkingdna
+router1(config)#ip dhcp pool drt
 router1(dhcp-config)#network 10.0.0.0
 router1(dhcp-config)#dns-server 10.0.0.1
 router1(dhcp-config)#default-router 10.0.0.1
@@ -100,4 +103,47 @@ router1(config)#logging buffered 51200 warning
 router1(config)#
 ```
 
+### Verify vty from Kali Linux VM
+
 - Verifying SSH
+
+```console
+ssh -l vivek 10.0.0.1
+```
+
+- Access Telnet
+
+```console
+telnet 10.0.0.1
+```
+
+## Security Tests
+
+- Performing enumeration of HTTP/HTTPS from Kali Linux VM
+
+```console
+nmap -ns 10.0.0.1
+```
+
+- Scan HTTP/HTTPS services from Kali Linux VM
+
+  - Find out what information you will get when you perform a version scan on port 80 and 443
+
+```console
+nmap -sV 10.0.0.1 -p80,443
+```
+
+- Scan SSL services from Kali Linux VM
+
+  - Now we know that ssl is running on port 443. Lets confirm it which version of ssl is running on this cisco router.
+  - We can make this work easier by using sslscan. You can find this tool easily on kali linux or simply you can download from the repositories. 
+
+```console
+sslscan 10.0.0.1
+```
+
+## Access Router page through HTTPS from Kali Linux VM
+
+- To access this page, open your web browser and enter the router ip address.
+- As you enter the router ip, it shows some exception. Click on add exception to move forward.
+- To access the router, we need to enter the **username:** `vivek` and **password:** `12345`.
