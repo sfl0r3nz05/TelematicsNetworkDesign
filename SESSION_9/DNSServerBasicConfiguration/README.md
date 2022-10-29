@@ -93,5 +93,4 @@ First, let’s begin with R1. We’ll setup hostname and IP related information.
 - Use Wireshark
   - If you captured the traffic, you’ll see DNS query and Answer as shown in Wireshark capture screenshot below
 
-
    <img src="./img/dns-wireshark.png"  width="60%" height="30%">
