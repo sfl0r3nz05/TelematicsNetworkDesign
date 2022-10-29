@@ -7,7 +7,7 @@
 ## How to use
 
 1. Read instructions:
-   1. [Configuración de ACL Estándar IPv4 (doc)](./ConfigurationOfACLIPv4Standard.pdf)
+   1. [Configuración de ACL Estándar IPv4 (doc)](./StandardACLConfiguration.pdf)
 
 2. Open the pka file on Packet Tracer
-   1. [Configuración de ACL Estándar IPv4 (pka)](./ConfigurationOfACLIPv4Standard.pka)
+   1. [Configuración de ACL Estándar IPv4 (pka)](./StandardACLConfiguration.pka)

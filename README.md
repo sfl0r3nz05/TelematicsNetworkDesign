@@ -44,7 +44,7 @@ This repository will contain a series of topics of interest for the subject:
    1. [SDN-Lab](./SDN-Lab/README.md)
 
 ## Sesion 9: Application Layer
-
 ### Practical part: Application Layer
 
-   1. [Configuración de ACL Estándar IPV4](./SESION_9/README.md)
+   1. [Configuración de ACL Estándar](./SESION_9/StandardACLConfiguration/README.md)
+   2. [Configuración de ACL Extendida](./SESION_9/ExtendedACLConfiguration/README.md)
