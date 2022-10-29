@@ -41,7 +41,7 @@ This repository will contain a series of topics of interest for the subject:
 
 ### Practical part: Network Layer: Control Plane
 
-   1. [SDN-Lab](./SDN-Lab/README.md)
+   1. [SDN-Lab](./SESSION_8/SDN-Lab/README.md)
 
 ## Session 9: Application Layer
 
