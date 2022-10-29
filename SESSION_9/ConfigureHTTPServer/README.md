@@ -85,14 +85,14 @@ router1#
 
 ```console
 router1#config t
-router1(config)#int f0/0
+router1(config)#interface f0/0
 router1(config-if)#ip add 10.0.0.1 255.0.0.0
 router1(config-if)#no shutdown
 router1(config-if)#exit
 router1(config)#
 ```
 
-- Configure DHCP POOL 
+- Configure DHCP POOL
 
 ```console
 router1(config)#ip dhcp pool drt
@@ -115,7 +115,7 @@ router1(config)#ip http authentication local
 - Create USER
 
 ```console
-router1(config)#username vivek privilege 15 password 0 12345
+router1(config)#username dtruser privilege 15 password 0 12345
 router1(config)#logging buffered 51200 warning
 router1(config)#
 ```
@@ -128,12 +128,27 @@ router1(config)#
   ifconfig eht0 10.0.0.2 netmask 255.0.0.0
   ```
 
+  - Or use DHCP client:
+
+    ```console
+    nano /etc/network/interfaces
+    ```
+
+  - Uncomment next two lines:
+
+    ```console
+    auto eth0
+    iface eth0 inet dhcp
+    ```
+
+  - Restart the Linux Docker Container
+
 - Test the connection via ping: `ping 10.0.0.1`
 
 - Verifying SSH
 
 ```console
-ssh -l vivek 10.0.0.1
+ssh -l dtruser 10.0.0.1
 ```
 
 - Access Telnet
@@ -163,8 +178,8 @@ sslscan 10.0.0.1
 
 ## Access Router page through HTTPS from Kali Linux VM
 
-- To access the router, we need to enter the **username:** `vivek` and **password:** `12345`.
+- To access the router, we need to enter the **username:** `dtruser` and **password:** `12345`.
 
 ```console
-curl -u vivek:12345 http://example.com
+curl -u dtruser:12345 http://example.com
 ```
