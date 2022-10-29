@@ -4,8 +4,9 @@
   - [Practice objectives](#practice-objectives)
   - [Network Scenario](#network-scenario)
   - [Import Appliances](#import-appliances)
+  - [Connect the devices](#connect-the-devices)
   - [Configure HTTP AND HTTPS Server on the Router](#configure-http-and-https-server-on-the-router)
-    - [Verify vty from Kali Linux VM](#verify-vty-from-kali-linux-vm)
+    - [Verify vty from Kali Linux Docker](#verify-vty-from-kali-linux-docker)
   - [Security Tests](#security-tests)
   - [Access Router page through HTTPS from Kali Linux VM](#access-router-page-through-https-from-kali-linux-vm)
 
@@ -43,27 +44,34 @@ This is a very simple network scenario which consists of one cisco router 7200 s
       1. Para insertar el dispositivo como Docker container usar las siguientes [instrucciones](../../utils/DockerKaliLinux/README.md).
 
       > **Importante:** Regrese a este apartado al importar el appliance.
+
+## Connect the devices
+
+   <img src="./img/img1.PNG"  width="60%" height="30%">
+
 ## Configure HTTP AND HTTPS Server on the Router
 
-- Configure HOSTNAME 
+- Configure HOSTNAME
 
 ```console
 R1(config)#hostname router1
 ```
 
-- Configure DOMAIN NAME 
+- Configure DOMAIN NAME
 
 ```console
-router1(config)#ip domain-name hackingdna.com
+router1(config)#ip domain-name dtr.com
 ```
 
-- Generate CRYPTO KEYS 
+- Generate CRYPTO KEYS
 
 ```console
-router1(config)#crypto key generate rsa general-keys modulus 1024
+router1(config)#crypto key generate rsa
+router1(config)#ip ssh time-out 60
+router1(config)#ip ssh authentication-retries 2
 ```
 
-- Configure LINE VTY 
+- Configure LINE VTY
 
 ```console
 router1#config t
@@ -73,13 +81,13 @@ router1(config-line)#end
 router1#
 ```
 
-- Configure INTERFACE 
+- Configure INTERFACE
 
 ```console
 router1#config t
 router1(config)#int f0/0
 router1(config-if)#ip add 10.0.0.1 255.0.0.0
-router1(config-if)#no shut
+router1(config-if)#no shutdown
 router1(config-if)#exit
 router1(config)#
 ```
@@ -96,7 +104,7 @@ router1(config)#end
 router1#
 ```
 
-- Configure HTTP SERVER 
+- Configure HTTP SERVER
 
 ```console
 router1(config)#ip http server
@@ -112,7 +120,15 @@ router1(config)#logging buffered 51200 warning
 router1(config)#
 ```
 
-### Verify vty from Kali Linux VM
+### Verify vty from Kali Linux Docker
+
+- Add IP address to the Kali Linux Docker
+
+  ```console
+  ifconfig eht0 10.0.0.2 netmask 255.0.0.0
+  ```
+
+- Test the connection via ping: `ping 10.0.0.1`
 
 - Verifying SSH
 
@@ -127,12 +143,6 @@ telnet 10.0.0.1
 ```
 
 ## Security Tests
-
-- Performing enumeration of HTTP/HTTPS from Kali Linux VM
-
-```console
-nmap -ns 10.0.0.1
-```
 
 - Scan HTTP/HTTPS services from Kali Linux VM
 
@@ -153,6 +163,8 @@ sslscan 10.0.0.1
 
 ## Access Router page through HTTPS from Kali Linux VM
 
-- To access this page, open your web browser and enter the router ip address.
-- As you enter the router ip, it shows some exception. Click on add exception to move forward.
 - To access the router, we need to enter the **username:** `vivek` and **password:** `12345`.
+
+```console
+curl -u vivek:12345 http://example.com
+```
