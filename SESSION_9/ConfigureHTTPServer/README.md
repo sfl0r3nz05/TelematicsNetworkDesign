@@ -31,9 +31,18 @@ This is a very simple network scenario which consists of one cisco router 7200 s
 
 ## Import Appliances
 
-- Import [Kali Linux Appliance](../../utils/appliances/kali-linux.gns3a)
-- Import [Cisco 7200 Router](../../utils/appliances/cisco-7200.gns3a)
+1. Integrar los enrutadores como:
+   1. Appliances:
+      1. Copie/Descargue en el host donde corre el cliente GNS3 el appliance del router`cisco-7200` el cual se encuentra [aquí](../../../utils/appliances/cisco-7200.gns3a).
+      2. Para insertar el dispositivo como appliance usar las siguientes [instrucciones](../../../utils/GNS3ImportAppliances/README.md).
 
+      > **Importante:** Regrese a este apartado al importar el appliance.
+
+2. Integrar el Linux PC como:
+   1. Docker container:
+      1. Para insertar el dispositivo como Docker container usar las siguientes [instrucciones](../../../utils/DockerKaliLinux/README.md).
+
+      > **Importante:** Regrese a este apartado al importar el appliance.
 ## Configure HTTP AND HTTPS Server on the Router
 
 - Configure HOSTNAME 
