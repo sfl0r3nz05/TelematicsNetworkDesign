@@ -25,17 +25,17 @@ This repository will contain a series of topics of interest for the subject:
 
 ### Practical part: Network Layer: Data Plane
 
-   1. [Networking with Docker](./NetworkingWithDocker/README.md)
+   1. [Networking with Docker](./SESSION_3/NetworkingWithDocker/README.md)
 
 ## Session 6
 
 ### Practical part
 
-   1. [Cgroup Demonstration](./CgroupsDemo/README.md)
-   2. [Namespaces Demonstration](./NamespacesDemo/README.md)
-   3. [LXC Demonstration](./LXCDemo/README.md)
-   4. [Docker Security Demonstration](./DockerSecDemo/README.md)
-   5. [Kubernetes Demonstration](./KubernetesDemo/README.md)
+   1. [Cgroup Demonstration](./SESSION_6/CgroupsDemo/README.md)
+   2. [Namespaces Demonstration](./SESSION_6/NamespacesDemo/README.md)
+   3. [LXC Demonstration](./SESSION_6/LXCDemo/ME.md)
+   4. [Docker Security Demonstration](./SESSION_6/DockerSecDemo/README.md)
+   5. [Kubernetes Demonstration](./SESSION_6/KubernetesDemo/README.md)
 
 ## Session 8: Network Layer: Control Plane
 
