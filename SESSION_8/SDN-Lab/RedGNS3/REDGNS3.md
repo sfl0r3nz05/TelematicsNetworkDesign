@@ -1,8 +1,8 @@
 # GNS3 Network Deployment
 
 - [GNS3 Network Deployment](#gns3-network-deployment)
-  - [Pre-requisitos](#pre-requisitos)
-  - [Instalación de Dispositivos](#instalación-de-dispositivos)
+  - [Prerequisites](#prerequisites)
+  - [Add devices](#add-devices)
   - [Despliegue de la red Tipo](#despliegue-de-la-red-tipo)
     - [Configuración de interfaces en enrutadores](#configuración-de-interfaces-en-enrutadores)
     - [Configuración de OSPF en los enrutadores](#configuración-de-ospf-en-los-enrutadores)
@@ -11,7 +11,7 @@
 
 Esta sección establece los procedimientos para descargar y configurar la red GNS3.
 
-## Pre-requisitos
+## Prerequisites
 
 - Tener la instancia `t2.large` (*GNS3-Server*) desplegada
 - Conexión a dicha instancia vía `ssh`.
@@ -20,36 +20,15 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
 - Conexión vía Telnet a esa instancia.
   - Implica tener abierto el rango de puertos 5000 - 50010 (Detalle comentado en la [instalación de GNS3](../../GNS3ServerDeployment/README.md#deploy-gns3-server)).
 
-## Instalación de Dispositivos
+## Add devices
 
-- La carpeta `ApplianceImageGNS3` contiene todas las imágenes que serán importadas de la siguiente manera, usando la de `cisco-3725` como muestra:
+1. Para integrar los enrutadores según1. Appliances:
+      1. Copie el appliance del router`cisco-3725` el cual se encuentra [aquí](../../utils/appliances/cisco-3725.gns3a)
+      2. Para integrar el dispositivo como appliance usar las siguientes [instrucciones](../../utils/GNS3ImportAppliances)
 
-1. Se descarga la imagen correspondiente al router `cisco-3725` ubicada en `~/TelematicsNetworkDesign/SDN-Lab/ApplianceImageGNS3`.
-2. Después, en GNS3, vamos a *File*, *Import appliance*, se localiza el directorio donde se tiene la *imágen descargada* y *Abrir*.
-3. Seleccionar instalar el dispositivo en el servidor principal:
-
-    <img src="./img/1.PNG"  width="60%" height="30%">
-
-4. Seleccionar la imagen del router `cisco-3725`:
-
-    <img src="./img/2.PNG"  width="60%" height="30%">
-
-5. Aceptar la instalación de la imagen del router `cisco-3725`:
-
-    <img src="./img/3.PNG"  width="60%" height="30%">
-
-6. Terminar el proceso de instalación de la imagen del router `cisco-3725`:
-
-    <img src="./img/4.PNG"  width="60%" height="30%">
-
-7. Recibir mensaje de imagen del router `cisco-3725` instalada:
-
-    <img src="./img/5.PNG"  width="60%" height="30%">
-
-8. Verificar que la imagen del router `cisco-3725` ha sido instalada
+2. Verificar que la imagen del router `cisco-3725` ha sido instalada
 
     <img src="./img/6.PNG"  width="60%" height="30%">
-
 ## Despliegue de la red Tipo
 
 1. Crear un nuevo proyecto en `File` y `New blank project` para empezar a desplegar la red.
