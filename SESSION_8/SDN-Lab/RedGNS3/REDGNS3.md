@@ -26,6 +26,8 @@ Esta sección establece los procedimientos para descargar y configurar la red GN
       1. Copie/Descargue en el host donde corre el cliente GNS3 el appliance del router`cisco-3725` el cual se encuentra [aquí](../../../utils/appliances/cisco-3725.gns3a).
       2. Para integrar el dispositivo como appliance usar las siguientes [instrucciones](../../../utils/GNS3ImportAppliances).
 
+      > **Importante:** Regrese a este apartado al cargar la imagen necesaria.
+
 2. Verificar que la imagen del router `cisco-3725` ha sido instalada
 
     <img src="./img/6.PNG"  width="60%" height="30%">
