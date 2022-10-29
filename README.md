@@ -47,5 +47,6 @@ This repository will contain a series of topics of interest for the subject:
 
 ### Practical part: Application Layer and ACL
 
-   1. [Standard ACL Configuration](./Session_9/StandardACLConfiguration/README.md)
-   2. [Extended ACL Configuration](./Session_9/ExtendedACLConfiguration/README.md)
+   1. [Basic DNS Server Configuration](./Session_9/DNSServerBasicConfiguration/README.md)
+   2. [Standard ACL Configuration](./Session_9/StandardACLConfiguration/README.md)
+   3. [Extended ACL Configuration](./Session_9/ExtendedACLConfiguration/README.md)
