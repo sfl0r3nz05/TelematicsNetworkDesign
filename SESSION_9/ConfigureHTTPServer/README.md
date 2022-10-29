@@ -31,8 +31,8 @@ This is a very simple network scenario which consists of one cisco router 7200 s
 
 ## Import Appliances
 
-- Import [Kali Linux Appliance](./appliances/kali-linux.gns3a)
-- Import [Cisco 7200 Router](./appliances/cisco-7200.gns3a)
+- Import [Kali Linux Appliance](../../utils/appliances/kali-linux.gns3a)
+- Import [Cisco 7200 Router](../../utils/appliances/cisco-7200.gns3a)
 
 ## Configure HTTP AND HTTPS Server on the Router
 
@@ -136,7 +136,7 @@ nmap -sV 10.0.0.1 -p80,443
 - Scan SSL services from Kali Linux VM
 
   - Now we know that ssl is running on port 443. Lets confirm it which version of ssl is running on this cisco router.
-  - We can make this work easier by using sslscan. You can find this tool easily on kali linux or simply you can download from the repositories. 
+  - We can make this work easier by using sslscan. You can find this tool easily on kali linux or simply you can download from the repositories.
 
 ```console
 sslscan 10.0.0.1

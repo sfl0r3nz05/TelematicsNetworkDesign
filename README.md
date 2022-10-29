@@ -19,7 +19,7 @@ This repository will contain a series of topics of interest for the subject:
 
 ## Prerequisites
 
-1. [Configuration of the GNS3 server on an EC2 instance](./GNS3ServerDeployment/README.md)
+1. [Configuration of the GNS3 server on an EC2 instance](./utils/GNS3ServerDeployment/README.md)
 
 ## Session 3: Network Layer: Data Plane
 
