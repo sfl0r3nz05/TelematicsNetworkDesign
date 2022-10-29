@@ -10,6 +10,6 @@
 
     <img src="./img/import1.PNG"  width="60%" height="30%">
 
-4. La imagen quedará subida satisfactoriamente:
+4. La imagen quedará satisfactoriamente cargada:
 
     <img src="./img/import2.PNG"  width="60%" height="30%">
