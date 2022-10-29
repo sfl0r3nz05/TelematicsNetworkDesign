@@ -69,6 +69,7 @@ router1(config)#ip domain-name dtr.com
 router1(config)#crypto key generate rsa
 router1(config)#ip ssh time-out 60
 router1(config)#ip ssh authentication-retries 2
+router1(config)# transport input ssh
 ```
 
 - Configure LINE VTY
