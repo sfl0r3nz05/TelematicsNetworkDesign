@@ -40,7 +40,7 @@ This is a very simple network scenario which consists of one cisco router 7200 s
 
 2. Integrar el Linux PC como:
    1. Docker container:
-      1. Para insertar el dispositivo como Docker container usar las siguientes [instrucciones](../../../utils/DockerKaliLinux/README.md).
+      1. Para insertar el dispositivo como Docker container usar las siguientes [instrucciones](../../utils/DockerKaliLinux/README.md).
 
       > **Importante:** Regrese a este apartado al importar el appliance.
 ## Configure HTTP AND HTTPS Server on the Router
