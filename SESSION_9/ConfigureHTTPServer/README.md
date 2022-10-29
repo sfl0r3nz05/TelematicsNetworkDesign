@@ -33,8 +33,8 @@ This is a very simple network scenario which consists of one cisco router 7200 s
 
 1. Integrar los enrutadores como:
    1. Appliances:
-      1. Copie/Descargue en el host donde corre el cliente GNS3 el appliance del router`cisco-7200` el cual se encuentra [aquí](../../../utils/appliances/cisco-7200.gns3a).
-      2. Para insertar el dispositivo como appliance usar las siguientes [instrucciones](../../../utils/GNS3ImportAppliances/README.md).
+      1. Copie/Descargue en el host donde corre el cliente GNS3 el appliance del router`cisco-7200` el cual se encuentra [aquí](../../utils/appliances/cisco-7200.gns3a).
+      2. Para insertar el dispositivo como appliance usar las siguientes [instrucciones](../../utils/GNS3ImportAppliances/README.md).
 
       > **Importante:** Regrese a este apartado al importar el appliance.
 
