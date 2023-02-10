@@ -78,7 +78,7 @@ To perform the right deployment follow each of the following steps:
 6. Run GNS3 server:
 
     ```console
-    gns3server
+    gns3server -q --daemon
     ```
 
    - It is now possible to access the GNS3 service:
