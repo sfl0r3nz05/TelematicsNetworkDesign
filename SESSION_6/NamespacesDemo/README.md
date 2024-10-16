@@ -1,10 +1,5 @@
 # Namespaces Demonstration
 
-- [Namespaces Demonstration](#namespaces-demonstration)
-  - [Types of Namespaces](#types-of-namespaces)
-  - [An Example of PID Namespaces](#an-example-of-pid-namespaces)
-    - [Conclusion of this example](#conclusion-of-this-example)
-
 *Namespaces* are a feature of the Linux kernel that partitions kernel resources such that one set of processes sees one set of resources while another set of processes sees a different set of resources. In other words, the key feature of *namespaces* is that they isolate processes from each other. On a server where you are running many different services, isolating each service and its associated processes from other services means that there is a smaller blast radius for changes, as well as a smaller footprint for security‑related concerns. Mostly though, isolating services meets the architectural style of microservices as described.
 
 ## Types of Namespaces
