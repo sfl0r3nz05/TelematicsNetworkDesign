@@ -4,15 +4,6 @@ Control Groups (cgroups) are a feature of the Linux kernel that allow you to lim
 
 In this lab you will use cgroups to limit the resources available to Docker containers. You will see how to pin a container to specific CPU cores, limit the number of CPU shares a container has, as well as how to prevent a fork bomb from taking down a Docker Host.
 
-- [Control Groups (cgroups) in Docker](#control-groups-cgroups-in-docker)
-  - [Prerequisites](#prerequisites)
-  - [cgroups and the Docker CLI](#cgroups-and-the-docker-cli)
-  - [Max-out two CPUs](#max-out-two-cpus)
-  - [Set CPU affinity](#set-cpu-affinity)
-  - [Set CPU share constraints](#set-cpu-share-constraints)
-  - [Docker Compose and cgroups](#docker-compose-and-cgroups)
-  - [Preventing a fork bomb](#preventing-a-fork-bomb)
-
 ## Prerequisites
 
 You will need all of the following to complete this lab:
@@ -50,27 +41,24 @@ In this step you'll start a new container that will max out two CPU cores. You w
     sudo apt-get install htop
     ```
 
-2. Clone GitHub repo locally on your Docker Host and change into the `cgroups/cpu-stress` directory.
+2. Create a Dockefile && docker-compose.yml
 
    ```console
-   git clone https://github.com/sfl0r3nz05/TelematicsNetworkDesign.git
-   cd ~/TelematicsNetworkDesign/DockerSecDemo/cpu-stress
+   FROM ubuntu:latest
+   RUN apt-get update && apt-get install -y stress
+   CMD stress -c 2
    ```
-
-3. Verify that the directory has a single `Dockerfile` and a single `docker-compose.yml` file.
 
    ```console
-   ls -l
+   version: "3.9"
+
+   services:
+     cpu-stress:
+       build: .
+       cpuset: '3'
    ```
 
-   - Output:
-
-   ```console
-   -rw-r--r-- 1 root root 23 Jul 11 09:49 docker-compose.yml
-   -rw-r--r-- 1 root root 85 Jul 11 09:49 Dockerfile
-   ```
-
-4. Inspect the contents of the `Dockerfile`.
+3. Inspect the contents of the `Dockerfile`.
 
    ```console
    cat Dockerfile
@@ -86,7 +74,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    As you can see, the Dockerfile describes a simple Ubuntu-based container that runs a single command `stress -c 2`. This command spawns two processes - both spinning on `sqrt()`. The effect of this command is to stress two CPU cores.
 
-5. Build the image specified in the `Dockerfile`.
+4. Build the image specified in the `Dockerfile`.
 
    ```console
    docker build -t cpu-stress .
@@ -108,7 +96,7 @@ In this step you'll start a new container that will max out two CPU cores. You w
    Successfully built 9e6a3f316e91
    ```
 
-6. Run a new container called **stresser** based on the image built in the previous step.
+5. Run a new container called **stresser** based on the image built in the previous step.
 
    ```console
    docker run -d --name stresser cpu-stress
@@ -126,13 +114,13 @@ In this step you'll start a new container that will max out two CPU cores. You w
 
    Be sure to run the container in the background with the `-d` flag so that you can run the `htop` command in the next step from the same terminal.
 
-7. View the impact of the container using the `htop` command.
+6. View the impact of the container using the `htop` command.
 
    ![img](./img/687474703a2f2f692e696d6775722e636f6d2f4c4232794e30742e706e67.png)
 
    The output above shows two stress processes (**stress -c 2**) maxing out two of the CPUs on the system (CPU 1 and CPU 4). Both `stress` processes are in the running state, and both consuming 100% of the CPU they are executing on.
 
-8. Stop and remove the **stresser** container.
+7. Stop and remove the **stresser** container.
 
    ```console
    docker stop stresser && docker rm stresser
