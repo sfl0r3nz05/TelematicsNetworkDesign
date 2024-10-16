@@ -1,24 +1,5 @@
 # Introduction to LXD projects
 
-- [Introduction to LXD projects](#introduction-to-lxd-projects)
-  - [Overview](#overview)
-    - [Requirements](#requirements)
-  - [Installing LXD Snap](#installing-lxd-snap)
-  - [Creating our first project](#creating-our-first-project)
-  - [Creating containers in our project](#creating-containers-in-our-project)
-  - [Listing projects](#listing-projects)
-  - [Listing containers in a project](#listing-containers-in-a-project)
-  - [Creating further isolated projects](#creating-further-isolated-projects)
-    - [A new client project](#a-new-client-project)
-  - [Setting up a new project profile](#setting-up-a-new-project-profile)
-    - [Comparing profiles](#comparing-profiles)
-    - [Creating the disk device](#creating-the-disk-device)
-    - [Creating the nic device](#creating-the-nic-device)
-    - [Create the containers](#create-the-containers)
-  - [Moving containers between projects](#moving-containers-between-projects)
-  - [Clearing up](#clearing-up)
-
-
 ## Overview
 
 - LXD is a container hypervisor providing a REST API to manage LXC containers. It provides a virtual machine like experience without incurring the overhead of a traditional hypervisor.
